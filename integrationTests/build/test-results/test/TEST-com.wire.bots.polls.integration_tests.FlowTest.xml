@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.wire.bots.polls.integration_tests.FlowTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2020-03-06T19:47:46" hostname="Mefisto" time="8.964">
+  <properties/>
+  <testcase name="test create poll and vote via object()" classname="com.wire.bots.polls.integration_tests.FlowTest" time="1.487"/>
+  <testcase name="test change vote and get results()" classname="com.wire.bots.polls.integration_tests.FlowTest" time="2.65"/>
+  <testcase name="test init conversation()" classname="com.wire.bots.polls.integration_tests.FlowTest" time="0.016"/>
+  <testcase name="test create poll and vote twice()" classname="com.wire.bots.polls.integration_tests.FlowTest" time="1.601"/>
+  <testcase name="test create poll()" classname="com.wire.bots.polls.integration_tests.FlowTest" time="0.534"/>
+  <testcase name="test new bot request()" classname="com.wire.bots.polls.integration_tests.FlowTest" time="0.011"/>
+  <testcase name="test vote and get results()" classname="com.wire.bots.polls.integration_tests.FlowTest" time="1.59"/>
+  <testcase name="test create poll and vote via text()" classname="com.wire.bots.polls.integration_tests.FlowTest" time="1.071"/>
+  <system-out><![CDATA[tearing down]]></system-out>
+  <system-err><![CDATA[139 [Test worker] INFO ktor.application - No ktor.deployment.watch patterns specified, automatic reload is not active
+334 [Test worker] INFO ktor.application - Responding at http://0.0.0.0:8081
+469 [Test worker @coroutine#1] WARN EnvironmentLoaderLogger - Env variable BOT_API not set! Using default value - http://localhost:8080
+470 [Test worker @coroutine#1] WARN EnvironmentLoaderLogger - Env variable SERVICE_TOKEN not set! Using default value - local-token
+]]></system-err>
+</testsuite>

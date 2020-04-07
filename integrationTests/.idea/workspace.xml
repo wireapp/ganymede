@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="373fcaf7-8051-4fad-a4bd-97195c585e92" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../src/main/resources/log4j2.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/../build.gradle.kts" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="1Yi7qCZFGdOovMX2oFy8uJHF9T7" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="show.unlinked.gradle.project.popup" value="true" />
+  </component>
+  <component name="RunManager" selected="Gradle.FlowTest">
+    <configuration name="FlowTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--tests &quot;com.wire.bots.polls.integration_tests.FlowTest&quot;" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":cleanTest" />
+            <option value=":test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>false</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="FlowTest.test change vote and get results" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--tests &quot;com.wire.bots.polls.integration_tests.FlowTest.test change vote and get results&quot;" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":cleanTest" />
+            <option value=":test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>false</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="FlowTest.test create poll and vote twice" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--tests &quot;com.wire.bots.polls.integration_tests.FlowTest.test create poll and vote twice&quot;" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":cleanTest" />
+            <option value=":test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>false</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="FlowTest.test new bot request" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--tests &quot;com.wire.bots.polls.integration_tests.FlowTest.test new bot request&quot;" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":cleanTest" />
+            <option value=":test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>false</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="FlowTest.test vote and get results" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--tests &quot;com.wire.bots.polls.integration_tests.FlowTest.test vote and get results&quot;" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":cleanTest" />
+            <option value=":test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>false</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.FlowTest" />
+        <item itemvalue="Gradle.FlowTest.test change vote and get results" />
+        <item itemvalue="Gradle.FlowTest.test create poll and vote twice" />
+        <item itemvalue="Gradle.FlowTest.test vote and get results" />
+        <item itemvalue="Gradle.FlowTest.test new bot request" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="373fcaf7-8051-4fad-a4bd-97195c585e92" name="Default Changelist" comment="" />
+      <created>1583413749694</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1583413749694</updated>
+      <workItem from="1583413754072" duration="1249000" />
+      <workItem from="1583523149508" duration="1835000" />
+    </task>
+    <task id="LOCAL-00001" summary="update integration tests to match one user one vote rule">
+      <created>1583524059210</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1583524059210</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="update integration tests to match one user one vote rule" />
+    <option name="LAST_COMMIT_MESSAGE" value="update integration tests to match one user one vote rule" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="723" y="322" width="926" height="579" key="#xdebugger.evaluate" timestamp="1583523844748">
+      <screen x="0" y="23" width="1920" height="1177" />
+    </state>
+    <state x="723" y="322" width="926" height="579" key="#xdebugger.evaluate/0.23.1920.1177@0.23.1920.1177" timestamp="1583523844748" />
+    <state x="536" y="214" key="CommitChangelistDialog2" timestamp="1583524059081">
+      <screen x="0" y="23" width="1920" height="1177" />
+    </state>
+    <state x="536" y="214" key="CommitChangelistDialog2/0.23.1920.1177@0.23.1920.1177" timestamp="1583524059081" />
+    <state width="1878" height="405" key="GridCell.Tab.0.bottom" timestamp="1583526707191">
+      <screen x="0" y="23" width="1920" height="1177" />
+    </state>
+    <state width="1878" height="405" key="GridCell.Tab.0.bottom/0.23.1920.1177@0.23.1920.1177" timestamp="1583526707191" />
+    <state width="1878" height="405" key="GridCell.Tab.0.center" timestamp="1583526707190">
+      <screen x="0" y="23" width="1920" height="1177" />
+    </state>
+    <state width="1878" height="405" key="GridCell.Tab.0.center/0.23.1920.1177@0.23.1920.1177" timestamp="1583526707190" />
+    <state width="1878" height="405" key="GridCell.Tab.0.left" timestamp="1583526707189">
+      <screen x="0" y="23" width="1920" height="1177" />
+    </state>
+    <state width="1878" height="405" key="GridCell.Tab.0.left/0.23.1920.1177@0.23.1920.1177" timestamp="1583526707189" />
+    <state width="1878" height="405" key="GridCell.Tab.0.right" timestamp="1583526707190">
+      <screen x="0" y="23" width="1920" height="1177" />
+    </state>
+    <state width="1878" height="405" key="GridCell.Tab.0.right/0.23.1920.1177@0.23.1920.1177" timestamp="1583526707190" />
+    <state width="1878" height="405" key="GridCell.Tab.1.bottom" timestamp="1583526707192">
+      <screen x="0" y="23" width="1920" height="1177" />
+    </state>
+    <state width="1878" height="405" key="GridCell.Tab.1.bottom/0.23.1920.1177@0.23.1920.1177" timestamp="1583526707192" />
+    <state width="1878" height="405" key="GridCell.Tab.1.center" timestamp="1583526707191">
+      <screen x="0" y="23" width="1920" height="1177" />
+    </state>
+    <state width="1878" height="405" key="GridCell.Tab.1.center/0.23.1920.1177@0.23.1920.1177" timestamp="1583526707191" />
+    <state width="1878" height="405" key="GridCell.Tab.1.left" timestamp="1583526707191">
+      <screen x="0" y="23" width="1920" height="1177" />
+    </state>
+    <state width="1878" height="405" key="GridCell.Tab.1.left/0.23.1920.1177@0.23.1920.1177" timestamp="1583526707191" />
+    <state width="1878" height="405" key="GridCell.Tab.1.right" timestamp="1583526707192">
+      <screen x="0" y="23" width="1920" height="1177" />
+    </state>
+    <state width="1878" height="405" key="GridCell.Tab.1.right/0.23.1920.1177@0.23.1920.1177" timestamp="1583526707192" />
+    <state x="560" y="351" key="Vcs.Push.Dialog.v2" timestamp="1583524078754">
+      <screen x="0" y="23" width="1920" height="1177" />
+    </state>
+    <state x="560" y="351" key="Vcs.Push.Dialog.v2/0.23.1920.1177@0.23.1920.1177" timestamp="1583524078754" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/src/test/kotlin/com/wire/bots/polls/integration_tests/FlowTest.kt</url>
+          <line>178</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
