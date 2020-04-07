@@ -66,5 +66,7 @@ fun client(config: KeyStoreConfiguration? = null) =
             level = LogLevel.ALL
         }
 
-        if (config != null) configureCertificates(config)
+        if (config != null) {
+            configureCertificates(config)
+        }
     }
