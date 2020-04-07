@@ -29,12 +29,15 @@ dependencies {
     implementation("io.ktor", "ktor-server-core", ktorVersion)
     implementation("io.ktor", "ktor-server-netty", ktorVersion)
     implementation("io.ktor", "ktor-jackson", ktorVersion)
-    implementation("io.ktor", "ktor-websockets", ktorVersion)
+
+    // Prometheus metrics
+    implementation("io.ktor", "ktor-metrics-micrometer", ktorVersion)
+    implementation("io.micrometer", "micrometer-registry-prometheus", "1.4.1")
 
     // Ktor client dependencies
     implementation("io.ktor", "ktor-client-json", ktorVersion)
     implementation("io.ktor", "ktor-client-jackson", ktorVersion)
-    implementation("io.ktor", "ktor-client-cio", ktorVersion)
+    implementation("io.ktor", "ktor-client-apache", ktorVersion)
     implementation("io.ktor", "ktor-client-logging-jvm", ktorVersion)
 
     // logging
@@ -45,18 +48,6 @@ dependencies {
     val kodeinVersion = "6.5.4"
     implementation("org.kodein.di", "kodein-di-generic-jvm", kodeinVersion)
     implementation("org.kodein.di", "kodein-di-framework-ktor-server-jvm", kodeinVersion)
-
-    // database
-    implementation("org.postgresql", "postgresql", "42.2.2")
-
-    val exposedVersion = "0.23.1"
-    implementation("org.jetbrains.exposed", "exposed-core", exposedVersion)
-    implementation("org.jetbrains.exposed", "exposed-dao", exposedVersion)
-    implementation("org.jetbrains.exposed", "exposed-jdbc", exposedVersion)
-    implementation("org.jetbrains.exposed", "exposed-java-time", exposedVersion)
-
-    // database migrations from the code
-    implementation("org.flywaydb", "flyway-core", "6.3.2")
 }
 
 tasks {

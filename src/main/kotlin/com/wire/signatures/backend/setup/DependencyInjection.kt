@@ -1,35 +1,27 @@
 package com.wire.signatures.backend.setup
 
 import io.ktor.client.HttpClient
-import io.ktor.client.engine.cio.CIO
-import io.ktor.client.features.json.JacksonSerializer
-import io.ktor.client.features.json.JsonFeature
-import io.ktor.client.features.logging.LogLevel
-import io.ktor.client.features.logging.Logger
-import io.ktor.client.features.logging.Logging
-import io.ktor.client.features.websocket.WebSockets
 import io.ktor.util.KtorExperimentalAPI
+import io.micrometer.prometheus.PrometheusConfig
+import io.micrometer.prometheus.PrometheusMeterRegistry
 import mu.KLogger
 import mu.KLogging
 import org.kodein.di.Kodein.MainBuilder
 import org.kodein.di.generic.bind
+import org.kodein.di.generic.instance
 import org.kodein.di.generic.singleton
 
 @KtorExperimentalAPI
 fun MainBuilder.configureContainer() {
 
     bind<HttpClient>() with singleton {
-        HttpClient(CIO) {
-            install(WebSockets)
+        client(instance())
+    }
 
-            install(JsonFeature) {
-                serializer = JacksonSerializer()
-            }
-
-            install(Logging) {
-                this.level
-                logger = Logger.DEBUG
-                level = LogLevel.ALL
+    bind<PrometheusMeterRegistry>() with singleton {
+        PrometheusMeterRegistry(PrometheusConfig.DEFAULT).apply {
+            with(this.config()) {
+                commonTags("application", "digital-signatures-be")
             }
         }
     }

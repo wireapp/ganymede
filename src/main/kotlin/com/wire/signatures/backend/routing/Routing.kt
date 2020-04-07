@@ -1,7 +1,6 @@
 package com.wire.signatures.backend.routing
 
 import ai.blindspot.ktoolz.extensions.newLine
-import com.wire.signatures.backend.dao.DatabaseSetup
 import io.ktor.application.call
 import io.ktor.content.TextContent
 import io.ktor.http.ContentType
@@ -9,15 +8,14 @@ import io.ktor.http.HttpStatusCode
 import io.ktor.response.respond
 import io.ktor.routing.Routing
 import io.ktor.routing.get
+import org.kodein.di.LazyKodein
 import org.kodein.di.generic.instance
-import org.kodein.di.ktor.kodein
 
 /**
  * Register routes to the KTor.
  */
-fun Routing.registerRoutes() {
+fun Routing.registerRoutes(k: LazyKodein) {
 
-    val k by kodein()
     val version by k.instance<String>("version")
 
     get("/") {
@@ -35,14 +33,5 @@ fun Routing.registerRoutes() {
         call.respond(HttpStatusCode.OK)
     }
 
-    /**
-     * More complex API for indication of all resources.
-     */
-    get("/status/health") {
-        if (DatabaseSetup.isConnected()) {
-            call.respond("healthy")
-        } else {
-            call.respond(HttpStatusCode.ServiceUnavailable, "DB connection is not working")
-        }
-    }
+    prometheusRoute(k)
 }

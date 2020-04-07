@@ -2,10 +2,7 @@ package com.wire.signatures.backend.setup
 
 import ai.blindspot.ktoolz.extensions.getEnv
 import ai.blindspot.ktoolz.extensions.whenNull
-import com.wire.signatures.backend.dto.conf.DatabaseConfiguration
-import com.wire.signatures.backend.setup.EnvConfigVariables.DB_PASSWORD
-import com.wire.signatures.backend.setup.EnvConfigVariables.DB_URL
-import com.wire.signatures.backend.setup.EnvConfigVariables.DB_USER
+import com.wire.signatures.backend.dto.KeyStoreConfiguration
 import mu.KLogging
 import org.kodein.di.Kodein.MainBuilder
 import org.kodein.di.generic.bind
@@ -14,8 +11,8 @@ import java.io.File
 
 private val logger = KLogging().logger("EnvironmentLoaderLogger")
 
-private fun getEnvOrLogDefault(env: String, defaultValue: String) = getEnv(env).whenNull {
-    logger.warn { "Env variable $env not set! Using default value - $defaultValue" }
+private fun loadConfiguration(env: EnvConfigVariables, defaultValue: String = "") = getEnv(env.name).whenNull {
+    logger.warn { "Env variable ${env.name} not set! Using default value - $defaultValue" }
 } ?: defaultValue
 
 
@@ -31,19 +28,16 @@ private fun loadVersion(defaultVersion: String): String = runCatching {
  */
 fun MainBuilder.bindConfiguration() {
 
-    // The default values used in this configuration are for the local development.
-
-    bind<DatabaseConfiguration>() with singleton {
-        DatabaseConfiguration(
-            userName = getEnvOrLogDefault(DB_USER, "wire-digital-signatures"),
-            password = getEnvOrLogDefault(DB_PASSWORD, "super-secret-wire-pwd"),
-            url = getEnvOrLogDefault(
-                DB_URL,
-                "jdbc:postgresql://localhost:5432/digi-sign"
-            )
+    bind<KeyStoreConfiguration>("key-store-config") with singleton {
+        KeyStoreConfiguration(
+            storePath = loadConfiguration(EnvConfigVariables.STORE_PATH),
+            storePass = loadConfiguration(EnvConfigVariables.STORE_PASS),
+            storeType = loadConfiguration(EnvConfigVariables.STORE_TYPE),
+            keyPass = loadConfiguration(EnvConfigVariables.KEY_PASS)
         )
     }
 
+    // The default values used in this configuration are for the local development.
     bind<String>("version") with singleton {
         loadVersion("development")
     }

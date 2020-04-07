@@ -3,22 +3,24 @@ package com.wire.signatures.backend.setup
 /**
  * Contains variables that are loaded from the environment.
  */
-object EnvConfigVariables {
+enum class EnvConfigVariables {
     /**
-     * Username for the database.
+     * Password for the key store.
      */
-    const val DB_USER = "DB_USER"
+    STORE_PASS,
 
     /**
-     * Password for the database.
+     * Path to the keystore.
      */
-    const val DB_PASSWORD = "DB_PASSWORD"
+    STORE_PATH,
 
     /**
-     * URL for the database.
-     *
-     * Example:
-     * `jdbc:postgresql://localhost:5432/bot-database`
+     * Type of the store, JKS for example
      */
-    const val DB_URL = "DB_URL"
+    STORE_TYPE,
+
+    /**
+     * Password for key.
+     */
+    KEY_PASS
 }
