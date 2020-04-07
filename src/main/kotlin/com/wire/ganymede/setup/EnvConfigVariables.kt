@@ -1,4 +1,4 @@
-package com.wire.signatures.backend.setup
+package com.wire.ganymede.setup
 
 /**
  * Contains variables that are loaded from the environment.

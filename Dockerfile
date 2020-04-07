@@ -1,6 +1,6 @@
 FROM adoptopenjdk/openjdk11:jdk-11.0.6_10-alpine AS build
-LABEL description="Wire Digital Signatures Backend"
-LABEL project="wire-digitail-signatures:backend"
+LABEL description="Wire Ganymede - Digital Signatures Backend"
+LABEL project="wire-backend:ganymede"
 
 ENV PROJECT_ROOT /src
 WORKDIR $PROJECT_ROOT
@@ -39,4 +39,4 @@ ENV RELEASE_FILE_PATH=$APP_ROOT/run/release.txt
 RUN echo $release_version > $RELEASE_FILE_PATH
 
 EXPOSE 8080
-ENTRYPOINT ["/bin/sh", "-c", "/app/run/bin/digital-signatures"]
+ENTRYPOINT ["/bin/sh", "-c", "/app/run/bin/ganymede"]

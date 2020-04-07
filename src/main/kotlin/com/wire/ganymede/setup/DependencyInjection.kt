@@ -1,4 +1,4 @@
-package com.wire.signatures.backend.setup
+package com.wire.ganymede.setup
 
 import io.ktor.client.HttpClient
 import io.ktor.util.KtorExperimentalAPI
@@ -21,7 +21,7 @@ fun MainBuilder.configureContainer() {
     bind<PrometheusMeterRegistry>() with singleton {
         PrometheusMeterRegistry(PrometheusConfig.DEFAULT).apply {
             with(this.config()) {
-                commonTags("application", "digital-signatures-be")
+                commonTags("application", "GANYMEDE")
             }
         }
     }

@@ -1,6 +1,6 @@
-package com.wire.signatures.backend
+package com.wire.ganymede
 
-import com.wire.signatures.backend.setup.init
+import com.wire.ganymede.setup.init
 import io.ktor.application.Application
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty

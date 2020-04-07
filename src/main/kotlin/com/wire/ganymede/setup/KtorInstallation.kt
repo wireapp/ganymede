@@ -1,7 +1,7 @@
-package com.wire.signatures.backend.setup
+package com.wire.ganymede.setup
 
 import com.fasterxml.jackson.databind.SerializationFeature
-import com.wire.signatures.backend.routing.registerRoutes
+import com.wire.ganymede.routing.registerRoutes
 import io.ktor.application.Application
 import io.ktor.application.install
 import io.ktor.features.CallLogging

@@ -1,2 +1,1 @@
-rootProject.name = "digital-signatures"
-
+rootProject.name = "ganymede"

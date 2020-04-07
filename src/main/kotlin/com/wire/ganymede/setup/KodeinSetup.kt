@@ -1,4 +1,4 @@
-package com.wire.signatures.backend.setup
+package com.wire.ganymede.setup
 
 import io.ktor.application.Application
 import io.ktor.util.KtorExperimentalAPI

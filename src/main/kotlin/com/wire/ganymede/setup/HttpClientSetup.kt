@@ -1,6 +1,6 @@
-package com.wire.signatures.backend.setup
+package com.wire.ganymede.setup
 
-import com.wire.signatures.backend.dto.KeyStoreConfiguration
+import com.wire.ganymede.dto.KeyStoreConfiguration
 import io.ktor.client.HttpClient
 import io.ktor.client.HttpClientConfig
 import io.ktor.client.engine.apache.Apache

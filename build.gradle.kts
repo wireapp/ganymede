@@ -5,10 +5,10 @@ plugins {
     id("net.nemerosa.versioning") version "2.12.1"
 }
 
-group = "com.wire.signatures.backend"
+group = "com.wire.ganymede"
 version = versioning.info?.tag ?: versioning.info?.lastTag ?: "development"
 
-val mainClass = "com.wire.signatures.backend.AppKt"
+val mainClass = "com.wire.ganymede.AppKt"
 
 application {
     mainClassName = mainClass

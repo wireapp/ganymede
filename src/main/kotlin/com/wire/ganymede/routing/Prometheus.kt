@@ -1,4 +1,4 @@
-package com.wire.signatures.backend.routing
+package com.wire.ganymede.routing
 
 import io.ktor.application.call
 import io.ktor.http.HttpStatusCode

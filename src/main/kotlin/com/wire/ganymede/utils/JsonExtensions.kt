@@ -1,6 +1,6 @@
 @file:Suppress("unused") // might be handy in the future
 
-package com.wire.signatures.backend.utils
+package com.wire.ganymede.utils
 
 import ai.blindspot.ktoolz.extensions.newLine
 import com.fasterxml.jackson.databind.DeserializationFeature

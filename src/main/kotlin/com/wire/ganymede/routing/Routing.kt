@@ -1,4 +1,4 @@
-package com.wire.signatures.backend.routing
+package com.wire.ganymede.routing
 
 import ai.blindspot.ktoolz.extensions.newLine
 import io.ktor.application.call

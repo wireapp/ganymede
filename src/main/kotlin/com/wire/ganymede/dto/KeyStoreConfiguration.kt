@@ -1,4 +1,4 @@
-package com.wire.signatures.backend.dto
+package com.wire.ganymede.dto
 
 /**
  * Configuration for the key store.

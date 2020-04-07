@@ -1,8 +1,8 @@
-package com.wire.signatures.backend.setup
+package com.wire.ganymede.setup
 
 import ai.blindspot.ktoolz.extensions.getEnv
 import ai.blindspot.ktoolz.extensions.whenNull
-import com.wire.signatures.backend.dto.KeyStoreConfiguration
+import com.wire.ganymede.dto.KeyStoreConfiguration
 import mu.KLogging
 import org.kodein.di.Kodein.MainBuilder
 import org.kodein.di.generic.bind
