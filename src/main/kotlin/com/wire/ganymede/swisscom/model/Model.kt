@@ -1,4 +1,4 @@
-package com.wire.ganymede.dto
+package com.wire.ganymede.swisscom.model
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonInclude
@@ -6,11 +6,18 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import java.util.HashMap
 import java.util.UUID
 
+/**
+ * This is code taken from Java and just automatically transformed to Kotlin.
+ *
+ * It is ugly, but we don't need to rewrite that.
+ */
+
 ///////////////// Sign Request ///////////////////////////
 @JsonInclude(JsonInclude.Include.NON_NULL)
 class RootSignRequest {
     @JsonProperty("SignRequest")
-    var signRequest: SignRequest = SignRequest()
+    var signRequest: SignRequest =
+        SignRequest()
 
     init {
         signRequest.requestId = UUID.randomUUID()
