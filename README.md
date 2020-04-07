@@ -1,19 +1,4 @@
-# Wire Poll Bot
-[![GitHub version](https://badge.fury.io/gh/wireapp%2Fpoll-bot.svg)](https://badge.fury.io/gh/wireapp%2Fpoll-bot)
-![CI/CD](https://github.com/wireapp/poll-bot/workflows/CI/CD/badge.svg)
-![Release Pipeline](https://github.com/wireapp/poll-bot/workflows/Release%20Pipeline/badge.svg)
-
-[Wire](https://wire.com/) bot for the polls.
-Service code to enable Poll bot in your team:
-```bash
-3131a0af-89d4-4569-b36d-50bcced4b1fb:163a422b-c314-4e34-95af-10b6b36cde18
-```
-
-## Commands
-Basic usage 
-* `/poll "Question" "Option 1" "Option 2"` will create poll
-* `/stats` will send result of the last poll in the conversation
-* `/help` to show help
+# Digital signatures Backend
 
 
 ## Dev Stack
@@ -30,15 +15,6 @@ Bot can connect to web socket stream or can use webhook from Roman.
 * To run the application inside the docker compose environment run `make up`
 
 For more details see [Makefile](Makefile).
-
-
-## Docker Images
-Poll bot has public [docker image](https://hub.docker.com/r/lukaswire/polls).
-```bash
-lukaswire/polls
-```
-Tag `latest` is current master branch - each commit is build and tagged as `latest`.
-[Releases](https://github.com/wireapp/poll-bot/releases) have then images with corresponding tag.
 
 
 ## Bot configuration

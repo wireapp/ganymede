@@ -5,10 +5,10 @@ plugins {
     id("net.nemerosa.versioning") version "2.12.1"
 }
 
-group = "com.wire.bots.polls"
+group = "com.wire.signatures.backend"
 version = versioning.info?.tag ?: versioning.info?.lastTag ?: "development"
 
-val mainClass = "com.wire.bots.polls.PollBotKt"
+val mainClass = "com.wire.signatures.backend.AppKt"
 
 application {
     mainClassName = mainClass
@@ -22,7 +22,7 @@ dependencies {
     // stdlib
     implementation(kotlin("stdlib-jdk8"))
     // extension functions
-    implementation("ai.blindspot.ktoolz", "ktoolz", "1.0.3")
+    implementation("ai.blindspot.ktoolz", "ktoolz", "1.0.4")
 
     // Ktor server dependencies
     val ktorVersion = "1.3.2"
@@ -34,7 +34,6 @@ dependencies {
     // Ktor client dependencies
     implementation("io.ktor", "ktor-client-json", ktorVersion)
     implementation("io.ktor", "ktor-client-jackson", ktorVersion)
-    implementation("io.ktor", "ktor-client-websockets", ktorVersion)
     implementation("io.ktor", "ktor-client-cio", ktorVersion)
     implementation("io.ktor", "ktor-client-logging-jvm", ktorVersion)
 
@@ -50,12 +49,11 @@ dependencies {
     // database
     implementation("org.postgresql", "postgresql", "42.2.2")
 
-    val exposedVersion = "0.22.1"
+    val exposedVersion = "0.23.1"
     implementation("org.jetbrains.exposed", "exposed-core", exposedVersion)
     implementation("org.jetbrains.exposed", "exposed-dao", exposedVersion)
     implementation("org.jetbrains.exposed", "exposed-jdbc", exposedVersion)
     implementation("org.jetbrains.exposed", "exposed-java-time", exposedVersion)
-    implementation("pw.forst", "exposed-upsert", "1.0")
 
     // database migrations from the code
     implementation("org.flywaydb", "flyway-core", "6.3.2")
@@ -69,12 +67,16 @@ tasks {
         kotlinOptions.jvmTarget = "1.8"
     }
 
+    distTar {
+        archiveFileName.set("app.tar")
+    }
+
     register<Jar>("fatJar") {
         manifest {
             attributes["Main-Class"] = mainClass
         }
         duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-        archiveFileName.set("polls.jar")
+        archiveFileName.set("app.jar")
         from(configurations.runtimeClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
         from(sourceSets.main.get().output)
     }

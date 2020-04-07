@@ -1,2 +1,2 @@
-rootProject.name = "polls"
+rootProject.name = "digital-signatures"
 
