@@ -46,6 +46,8 @@ fun Routing.signingRoute(k: LazyKodein) {
      * Sign request.
      */
     post("/pending/{responseId}") {
+        userUuid() ?: return@post
+
         val responseId = call.parameters["responseId"]
 
         when {
