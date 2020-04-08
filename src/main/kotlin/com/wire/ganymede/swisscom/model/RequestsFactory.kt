@@ -30,7 +30,7 @@ fun RootSignRequest.createSignRequestForName(signer: User, name: String) {
  */
 fun Phone.setFor(signer: User, name: String) {
     language = signer.locale
-    phoneNumber = signer.phone?.replace("+", "")?.replace(" ", "")
+    phoneNumber = signer.phone
     message = "Please confirm the signing of the document: $name"
     serialNumber = signer.id.toString()
 }
