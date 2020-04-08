@@ -1,6 +1,6 @@
 package com.wire.ganymede.swisscom
 
-import com.wire.ganymede.dto.User
+import com.wire.ganymede.internal.model.User
 import com.wire.ganymede.swisscom.model.RootPendingRequest
 import com.wire.ganymede.swisscom.model.RootSignRequest
 import com.wire.ganymede.swisscom.model.RootSignResponse

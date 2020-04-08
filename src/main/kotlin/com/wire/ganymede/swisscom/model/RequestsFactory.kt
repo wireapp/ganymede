@@ -1,6 +1,6 @@
 package com.wire.ganymede.swisscom.model
 
-import com.wire.ganymede.dto.User
+import com.wire.ganymede.internal.model.User
 
 /**
  * Set document information.
