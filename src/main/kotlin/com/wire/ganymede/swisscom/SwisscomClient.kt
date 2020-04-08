@@ -37,29 +37,34 @@ class SwisscomClient(private val client: HttpClient, apiConfig: SwisscomAPIConfi
      * Issues sign request.
      */
     suspend fun sign(signer: User, documentId: String, hash: String, name: String): SignResponse? {
-
+        logger.debug { "Sign request - building object for the Swisscom API." }
         val request = RootSignRequest().apply {
             hashDocument(hash, documentId)
             createSignRequestForName(signer, name)
         }
-
+        logger.debug { "Document prepared, executing." }
         return resolveRequest(request, signUrl)
+            .also { logger.debug { "Sign request resolved." } }
     }
 
     /**
      * Issues pending request.
      */
-    suspend fun pending(responseId: UUID): SignResponse? = resolveRequest(
-        RootPendingRequest(responseId), pendingUrl
-    )
+    suspend fun pending(responseId: UUID): SignResponse? {
+        logger.debug { "Sending pending request." }
+        return resolveRequest(RootPendingRequest(responseId), pendingUrl)
+            .also { logger.debug { "Pending request resolved." } }
+    }
 
     private suspend fun <T : Any> resolveRequest(body: T, url: String): SignResponse? {
-        // Swisscom is not using http codes to indicate result of the request
+        logger.debug { "Executing request to Swisscom" }
+
         val result = client.post<HttpStatement>(body = body) {
             url(url)
             contentType(ContentType.Application.Json)
             accept(ContentType.Application.Json)
         }.execute()
+        logger.debug { "Request status: ${result.status}. Parsing received data." }
 
         val (signResponse, _) = tryParse<RootSignResponse>(result)
         return signResponse?.signResponse
@@ -67,13 +72,17 @@ class SwisscomClient(private val client: HttpClient, apiConfig: SwisscomAPIConfi
 
     private suspend inline fun <reified T : Any> tryParse(response: HttpResponse): Pair<T?, String> =
         when {
+            // Swisscom is not using http codes to indicate result of the request
             response.status.isSuccess() -> {
+                logger.debug { "Result was successful." }
                 val receivedText = response.receive<String>()
+                logger.debug { "Parsing JSON." }
                 parseJson<T>(receivedText) to receivedText
             }
             else -> {
+                logger.error { "Non 200 status code from Swisscom API! Status code: ${response.status}" }
                 val receivedText = response.receive<String>()
-                logger.error { "Request was not successful! Status code: ${response.status}, payload: $receivedText" }
+                logger.error { "Payload: $receivedText" }
                 null to receivedText
             }
         }
