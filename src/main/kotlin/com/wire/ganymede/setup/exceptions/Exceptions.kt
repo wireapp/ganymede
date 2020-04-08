@@ -1,5 +1,8 @@
-package com.wire.ganymede.internal
+package com.wire.ganymede.setup.exceptions
 
+/**
+ * Response when the dependency service is not available.
+ */
 class ServiceUnavailableException(message: String?) : Exception(message)
 
 /**

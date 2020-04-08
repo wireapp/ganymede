@@ -2,6 +2,7 @@ package com.wire.ganymede.setup
 
 import com.fasterxml.jackson.databind.SerializationFeature
 import com.wire.ganymede.routing.registerRoutes
+import com.wire.ganymede.setup.exceptions.registerExceptionHandlers
 import io.ktor.application.Application
 import io.ktor.application.install
 import io.ktor.features.CallLogging

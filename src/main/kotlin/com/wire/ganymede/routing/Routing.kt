@@ -1,6 +1,5 @@
 package com.wire.ganymede.routing
 
-import ai.blindspot.ktoolz.extensions.newLine
 import io.ktor.application.call
 import io.ktor.client.HttpClient
 import io.ktor.client.request.get
@@ -34,7 +33,7 @@ fun Routing.registerRoutes(k: LazyKodein) {
      * Send data about version.
      */
     get("/version") {
-        call.respond(TextContent("{\"version\": \"$version\"}$newLine", ContentType.Application.Json))
+        call.respond(mapOf("version" to version))
     }
 
     /**
@@ -59,4 +58,5 @@ fun Routing.registerRoutes(k: LazyKodein) {
     }
 
     prometheusRoute(k)
+    signingRoute(k)
 }

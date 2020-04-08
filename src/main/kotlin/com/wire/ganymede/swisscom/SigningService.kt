@@ -1,10 +1,10 @@
 package com.wire.ganymede.swisscom
 
-import com.wire.ganymede.internal.ServiceUnavailableException
 import com.wire.ganymede.internal.WireInternalClient
 import com.wire.ganymede.internal.model.SignResponse
 import com.wire.ganymede.internal.model.Signature
-import com.wire.ganymede.internal.validateNotNull
+import com.wire.ganymede.setup.exceptions.ServiceUnavailableException
+import com.wire.ganymede.setup.exceptions.validateNotNull
 import mu.KLogging
 import java.util.UUID
 

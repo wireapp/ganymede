@@ -7,7 +7,6 @@ data class SignResponse(
     val consentURL: String?
 )
 
-
 data class Signature(
     val documentId: String,
     val cms: String

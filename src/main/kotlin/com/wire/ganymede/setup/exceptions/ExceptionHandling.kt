@@ -1,20 +1,18 @@
-package com.wire.ganymede.setup
+package com.wire.ganymede.setup.exceptions
 
-import com.wire.ganymede.internal.DataValidationException
-import com.wire.ganymede.internal.ServiceUnavailableException
-import com.wire.ganymede.utils.createJson
 import io.ktor.application.Application
 import io.ktor.application.call
 import io.ktor.application.install
 import io.ktor.features.StatusPages
-import io.ktor.http.ContentType
 import io.ktor.http.HttpStatusCode
 import io.ktor.response.respond
-import io.ktor.response.respondText
 import mu.KLogging
 
 private val logger = KLogging().logger("ExceptionHandler")
 
+/**
+ * Registers exception handling.
+ */
 fun Application.registerExceptionHandlers() {
     install(StatusPages) {
         exception<ServiceUnavailableException> { cause ->
@@ -25,11 +23,8 @@ fun Application.registerExceptionHandlers() {
         exception<DataValidationException> { cause ->
             logger.error { "Malformed data received! ${cause.message}" }
 
-            call.respondText(
-                contentType = ContentType.Application.Json,
-                status = HttpStatusCode.BadRequest
-            ) {
-                createJson(mapOf("message" to cause.message))
+            call.respond(status = HttpStatusCode.BadRequest) {
+                mapOf("message" to cause.message)
             }
         }
     }
