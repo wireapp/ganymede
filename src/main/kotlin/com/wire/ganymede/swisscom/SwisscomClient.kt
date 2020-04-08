@@ -5,6 +5,7 @@ import com.wire.ganymede.swisscom.model.RootPendingRequest
 import com.wire.ganymede.swisscom.model.RootSignRequest
 import com.wire.ganymede.swisscom.model.RootSignResponse
 import com.wire.ganymede.swisscom.model.SignResponse
+import com.wire.ganymede.swisscom.model.SwisscomAPIConfig
 import com.wire.ganymede.swisscom.model.createSignRequestForName
 import com.wire.ganymede.swisscom.model.hashDocument
 import com.wire.ganymede.utils.appendPath

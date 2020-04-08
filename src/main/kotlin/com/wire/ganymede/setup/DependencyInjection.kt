@@ -1,5 +1,8 @@
 package com.wire.ganymede.setup
 
+import com.wire.ganymede.internal.WireInternalClient
+import com.wire.ganymede.swisscom.SigningService
+import com.wire.ganymede.swisscom.SwisscomClient
 import io.ktor.client.HttpClient
 import io.ktor.util.KtorExperimentalAPI
 import io.micrometer.prometheus.PrometheusConfig
@@ -25,6 +28,11 @@ fun MainBuilder.configureContainer() {
             }
         }
     }
+
+    bind<WireInternalClient>() with singleton { WireInternalClient() }
+
+    bind<SigningService>() with singleton { SigningService(instance(), instance()) }
+    bind<SwisscomClient>() with singleton { SwisscomClient(instance(), instance()) }
 
     bind<KLogger>("routing-logger") with singleton { KLogging().logger("Routing") }
     bind<KLogger>("install-logger") with singleton { KLogging().logger("KtorStartup") }

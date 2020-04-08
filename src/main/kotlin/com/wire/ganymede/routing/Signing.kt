@@ -1,6 +1,7 @@
 package com.wire.ganymede.routing
 
 import ai.blindspot.ktoolz.extensions.isUUID
+import com.wire.ganymede.routing.auth.userUuid
 import com.wire.ganymede.routing.requests.SignRequest
 import com.wire.ganymede.swisscom.SigningService
 import io.ktor.application.call
@@ -24,13 +25,15 @@ fun Routing.signingRoute(k: LazyKodein) {
      * Sign request.
      */
     post("/request") {
+        val userId = userUuid() ?: return@post
+
         runCatching {
             call.receive<SignRequest>()
         }.onFailure {
             call.respond(HttpStatusCode.BadRequest, mapOf("message" to "Malformed SignRequest."))
         }.onSuccess {
             val response = service.sign(
-                userId = UUID.fromString(""), // TODO load that from cookie
+                userId = userId,
                 documentId = it.documentId,
                 documentHash = it.hash,
                 documentName = it.name
