@@ -18,7 +18,7 @@ RUN ./gradlew resolveDependencies
 
 # Copy project and build
 COPY . $PROJECT_ROOT
-RUN ./gradlew fatJar
+RUN ./gradlew distTar
 
 # Runtime
 FROM adoptopenjdk/openjdk11:jre-11.0.6_10-alpine
