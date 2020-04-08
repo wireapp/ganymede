@@ -35,7 +35,7 @@ class SwisscomClient(private val client: HttpClient, apiConfig: SwisscomAPIConfi
     /**
      * Issues sign request.
      */
-    suspend fun sign(signer: User, documentId: String, name: String, hash: String): SignResponse? {
+    suspend fun sign(signer: User, documentId: String, hash: String, name: String): SignResponse? {
 
         val request = RootSignRequest().apply {
             hashDocument(hash, documentId)
