@@ -1,5 +1,5 @@
 # Ganymede - Digital signatures Backend
-
+![CI/CD](https://github.com/wireapp/ganymede/workflows/CI/CD/badge.svg)
 
 ## Dev Stack
 * HTTP Server - [Ktor](https://ktor.io/)
