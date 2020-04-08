@@ -27,7 +27,7 @@ ENV APP_ROOT /app
 WORKDIR $APP_ROOT
 
 # Obtain built from the base
-COPY --from=build /src/build/libs/app.tar $APP_ROOT/
+COPY --from=build /src/build/distributions/app.tar $APP_ROOT/
 
 # Extract executables
 RUN mkdir $APP_ROOT/run

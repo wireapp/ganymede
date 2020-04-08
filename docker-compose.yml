@@ -1,14 +1,17 @@
 version: '3.7'
 services:
-
-  bot:
+  ganymede:
     build:
       context: .
       dockerfile: Dockerfile
       args:
         - release_version=docker-compose
-    image: lukaswire/digital-signatures-be
-    container_name: digital-signatures-be
-    env_file: .env
+    image: lukaswire/ganymede
+    container_name: ganymede
+    volumes:
+      - ./certificates:/certificates
+    env_file: certificates/my.env
+    environment:
+      - STORE_PATH=/certificates/my.jks
     ports:
       - 8080:8080

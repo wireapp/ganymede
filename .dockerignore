@@ -1,0 +1,9 @@
+Dockerfile
+docker-compose.yml
+LICENCE
+README.md
+Makefile
+.git/
+.gradle/
+.idea/
+build/
