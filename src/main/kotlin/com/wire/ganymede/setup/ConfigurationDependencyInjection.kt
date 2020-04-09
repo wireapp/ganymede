@@ -31,7 +31,6 @@ fun MainBuilder.bindConfiguration() {
     }
 
     bind<WireAPIConfig>() with singleton {
-        // TODO load that from the config
         WireAPIConfig(
             baseUrl = loadConfiguration(EnvConfigVariables.WIRE_API_BASE_URL, props),
             userPath = loadConfiguration(EnvConfigVariables.WIRE_API_USERS_PATH, props, "i/users")
@@ -45,11 +44,11 @@ fun MainBuilder.bindConfiguration() {
                 "https://ais.swisscom.com/AIS-Server/rs/v1.0"
             ),
             signPath = loadConfiguration(
-                EnvConfigVariables.SWISSCOM_API_BASE_URL, props,
+                EnvConfigVariables.SWISSCOM_API_SIGN_PATH, props,
                 "/sign"
             ),
             pendingPath = loadConfiguration(
-                EnvConfigVariables.SWISSCOM_API_BASE_URL, props,
+                EnvConfigVariables.SWISSCOM_API_PENDING_PATH, props,
                 "/pending"
             )
         )

@@ -40,7 +40,32 @@ enum class EnvConfigVariables {
     /**
      * Password for key.
      */
-    KEY_PASS
+    KEY_PASS,
+
+    /**
+     * Base URL for the internal Wire BE.
+     */
+    WIRE_API_BASE_URL,
+
+    /**
+     * Path to users API.
+     */
+    WIRE_API_USERS_PATH,
+
+    /**
+     * Base URL for Swisscom API.
+     */
+    SWISSCOM_API_BASE_URL,
+
+    /**
+     * Swisscom API sign path.
+     */
+    SWISSCOM_API_SIGN_PATH,
+
+    /**
+     * Swisscom pending path.
+     */
+    SWISSCOM_API_PENDING_PATH
 }
 ```
 
