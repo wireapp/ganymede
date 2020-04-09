@@ -3,6 +3,7 @@ package com.wire.ganymede.swisscom
 import com.wire.ganymede.internal.WireInternalClient
 import com.wire.ganymede.internal.model.SignResponse
 import com.wire.ganymede.internal.model.Signature
+import com.wire.ganymede.internal.model.User
 import com.wire.ganymede.setup.exceptions.SwisscomDataValidationException
 import mu.KLogging
 import java.util.UUID
@@ -21,7 +22,13 @@ class SigningService(private val swisscomClient: SwisscomClient, private val wir
         logger.debug { "Sign request received for user $userId. Obtaining user from Wire" }
         val user = wireClient.getUser(userId)
         logger.debug { "User obtained." }
+        return sign(user, documentId, documentHash, documentName)
+    }
 
+    /**
+     * Signs the provided document. Throws exception if received data are malformed.
+     */
+    suspend fun sign(user: User, documentId: String, documentHash: String, documentName: String): SignResponse {
         logger.debug { "Sign request to swisscom." }
         val signResponse = swisscomClient
             .sign(user, documentId = documentId, hash = documentHash, name = documentName)
