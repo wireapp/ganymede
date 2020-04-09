@@ -21,24 +21,38 @@ fun MainBuilder.bindConfiguration() {
     val props = loadProperties(getEnv("PROPS_PATH"))
 
     bind<KeyStoreConfiguration>() with singleton {
+        val storePass = loadConfiguration(EnvConfigVariables.STORE_PASS, props)
         KeyStoreConfiguration(
             storePath = loadConfiguration(EnvConfigVariables.STORE_PATH, props),
-            storePass = loadConfiguration(EnvConfigVariables.STORE_PASS, props),
-            storeType = loadConfiguration(EnvConfigVariables.STORE_TYPE, props)
+            storePass = storePass,
+            storeType = loadConfiguration(EnvConfigVariables.STORE_TYPE, props),
+            keyPass = loadConfiguration(EnvConfigVariables.KEY_PASS, props, storePass)
         )
     }
 
     bind<WireAPIConfig>() with singleton {
         // TODO load that from the config
         WireAPIConfig(
-            "",
-            ""
+            baseUrl = loadConfiguration(EnvConfigVariables.WIRE_API_BASE_URL, props),
+            userPath = loadConfiguration(EnvConfigVariables.WIRE_API_USERS_PATH, props, "i/users")
         )
     }
 
     bind<SwisscomAPIConfig>() with singleton {
-        // TODO load that from config
-        SwisscomAPIConfig()
+        SwisscomAPIConfig(
+            baseUrl = loadConfiguration(
+                EnvConfigVariables.SWISSCOM_API_BASE_URL, props,
+                "https://ais.swisscom.com/AIS-Server/rs/v1.0"
+            ),
+            signPath = loadConfiguration(
+                EnvConfigVariables.SWISSCOM_API_BASE_URL, props,
+                "/sign"
+            ),
+            pendingPath = loadConfiguration(
+                EnvConfigVariables.SWISSCOM_API_BASE_URL, props,
+                "/pending"
+            )
+        )
     }
 
     // The default values used in this configuration are for the local development.
@@ -55,9 +69,14 @@ private fun loadConfiguration(
     props: Properties = Properties(),
     defaultValue: String = ""
 ): String =
-    getEnv(env.name).whenNull {
+    (getEnv(env.name).whenNull {
         logger.info { "Env variable ${env.name} not set. Loading from props." }
-    } ?: props.getProperty(env.name, defaultValue)
+    } ?: props.getProperty(env.name, defaultValue))
+        .also {
+            if (it.isBlank()) {
+                logger.warn { "No value set for configuration ${env.name}!" }
+            }
+        }
 
 
 @Suppress("SameParameterValue") // we don't care...
