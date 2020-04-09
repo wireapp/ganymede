@@ -29,7 +29,7 @@ fun MainBuilder.configureContainer() {
         }
     }
 
-    bind<WireInternalClient>() with singleton { WireInternalClient() }
+    bind<WireInternalClient>() with singleton { WireInternalClient(instance(), instance()) }
 
     bind<SigningService>() with singleton { SigningService(instance(), instance()) }
     bind<SwisscomClient>() with singleton { SwisscomClient(instance(), instance()) }

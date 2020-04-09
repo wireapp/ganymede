@@ -1,6 +1,8 @@
 package com.wire.ganymede.swisscom
 
 import com.wire.ganymede.internal.model.User
+import com.wire.ganymede.setup.exceptions.SwisscomDataValidationException
+import com.wire.ganymede.setup.exceptions.SwisscomUnavailableException
 import com.wire.ganymede.swisscom.model.RootPendingRequest
 import com.wire.ganymede.swisscom.model.RootSignRequest
 import com.wire.ganymede.swisscom.model.RootSignResponse
@@ -66,8 +68,12 @@ class SwisscomClient(private val client: HttpClient, apiConfig: SwisscomAPIConfi
         }.execute()
         logger.debug { "Request status: ${result.status}. Parsing received data." }
 
-        val (signResponse, _) = tryParse<RootSignResponse>(result)
-        return signResponse?.signResponse
+        val (signResponse, text) = tryParse<RootSignResponse>(result)
+        if (signResponse == null) {
+            throw SwisscomDataValidationException("It was not possible to parse RootSignResponse, received message: $text")
+        }
+
+        return signResponse.signResponse
     }
 
     private suspend inline fun <reified T : Any> tryParse(response: HttpResponse): Pair<T?, String> =
@@ -80,10 +86,7 @@ class SwisscomClient(private val client: HttpClient, apiConfig: SwisscomAPIConfi
                 parseJson<T>(receivedText) to receivedText
             }
             else -> {
-                logger.error { "Non 200 status code from Swisscom API! Status code: ${response.status}" }
-                val receivedText = response.receive<String>()
-                logger.error { "Payload: $receivedText" }
-                null to receivedText
+                throw SwisscomUnavailableException(response.status, runCatching { response.receive<String>() }.getOrNull())
             }
         }
 }

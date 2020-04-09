@@ -3,6 +3,7 @@ package com.wire.ganymede.setup
 import ai.blindspot.ktoolz.extensions.getEnv
 import ai.blindspot.ktoolz.extensions.whenNull
 import com.wire.ganymede.dto.KeyStoreConfiguration
+import com.wire.ganymede.internal.model.WireAPIConfig
 import com.wire.ganymede.swisscom.model.SwisscomAPIConfig
 import mu.KLogging
 import org.kodein.di.Kodein.MainBuilder
@@ -27,7 +28,16 @@ fun MainBuilder.bindConfiguration() {
         )
     }
 
+    bind<WireAPIConfig>() with singleton {
+        // TODO load that from the config
+        WireAPIConfig(
+            "",
+            ""
+        )
+    }
+
     bind<SwisscomAPIConfig>() with singleton {
+        // TODO load that from config
         SwisscomAPIConfig()
     }
 

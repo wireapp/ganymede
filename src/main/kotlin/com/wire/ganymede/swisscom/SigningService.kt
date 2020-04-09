@@ -4,7 +4,7 @@ import com.wire.ganymede.internal.WireInternalClient
 import com.wire.ganymede.internal.model.SignResponse
 import com.wire.ganymede.internal.model.Signature
 import com.wire.ganymede.setup.exceptions.ServiceUnavailableException
-import com.wire.ganymede.setup.exceptions.validateNotNull
+import com.wire.ganymede.setup.exceptions.SwisscomDataValidationException
 import mu.KLogging
 import java.util.UUID
 
@@ -28,13 +28,13 @@ class SigningService(private val swisscomClient: SwisscomClient, private val wir
             .sign(user, documentId = documentId, hash = documentHash, name = documentName)
         logger.debug { "Response is ${if (signResponse != null) "present" else "null!"}" }
 
-        val outputs = validateNotNull(signResponse?.optionalOutputs) {
+        val outputs = assureNotNull(signResponse?.optionalOutputs) {
             signResponse?.result?.minor ?: "No data received from Swisscom!"
         }
 
         logger.debug { "Building sign response." }
         return SignResponse(
-            responseId = validateNotNull(outputs.responseId) { "Response ID was not set! This is not valid request." },
+            responseId = assureNotNull(outputs.responseId) { "Response ID was not set! This is not valid request." },
             consentURL = outputs.stepUpAuthorisationInfo?.result?.url
         )
     }
@@ -53,8 +53,22 @@ class SigningService(private val swisscomClient: SwisscomClient, private val wir
 
         logger.debug { "SignatureObject ${if (signatureObject != null) "exists" else "is null!"}" }
         return Signature(
-            documentId = validateNotNull(signatureObject?.documentId) { "Document id from signature object can not be null!" },
-            cms = validateNotNull(signatureObject?.base64Signature?.value) { "CMS or base64Signature can not be null!" }
+            documentId = assureNotNull(signatureObject?.documentId) { "Document id from signature object can not be null!" },
+            cms = assureNotNull(signatureObject?.base64Signature?.value) { "CMS or base64Signature can not be null!" }
         )
     }
+
+    /**
+     * Throws [SwisscomDataValidationException] on null input.
+     */
+    private inline fun <T : Any> assureNotNull(value: T?, lazyMessage: () -> Any): T {
+        if (value == null) {
+            val message = lazyMessage()
+            throw SwisscomDataValidationException(message.toString())
+        } else {
+            return value
+        }
+    }
 }
+
+

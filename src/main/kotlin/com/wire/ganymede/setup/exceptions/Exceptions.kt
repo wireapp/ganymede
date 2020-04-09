@@ -1,5 +1,7 @@
 package com.wire.ganymede.setup.exceptions
 
+import io.ktor.http.HttpStatusCode
+
 /**
  * Response when the dependency service is not available.
  */
@@ -8,17 +10,15 @@ class ServiceUnavailableException(message: String?) : Exception(message)
 /**
  * Indicates that data received from the API were malformed.
  */
-class DataValidationException(message: String?) : Exception(message)
-
+class SwisscomDataValidationException(message: String?) : Exception(message)
 
 /**
- * Throws [DataValidationException] on null input.
+ * Swisscom API didn't return success code.
  */
-inline fun <T : Any> validateNotNull(value: T?, lazyMessage: () -> Any): T {
-    if (value == null) {
-        val message = lazyMessage()
-        throw DataValidationException(message.toString())
-    } else {
-        return value
-    }
-}
+class SwisscomUnavailableException(statusCode: HttpStatusCode, receivedText: String?) :
+    Exception("Swisscom status code: $statusCode with explanation: ${receivedText ?: "no text received"}.")
+
+/**
+ * Exception thrown when client does not received valid data.
+ */
+class WireInternalAPIException(message: String?, cause: Throwable) : Exception(message, cause)

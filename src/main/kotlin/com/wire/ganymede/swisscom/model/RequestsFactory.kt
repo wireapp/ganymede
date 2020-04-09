@@ -18,8 +18,8 @@ fun RootSignRequest.createSignRequestForName(signer: User, name: String) {
     val certificateRequest = signRequest.optionalInputs.certificateRequest
 
     certificateRequest.distinguishedName =
-        "CN=TEST ${signer.firstname} ${signer.lastname}, " +
-                "givenname=${signer.firstname}, surname=${signer.lastname}, " +
+        "CN=TEST ${signer.name}, " +
+                "givenname=${signer.firstName}, surname=${signer.lastName}, " +
                 "C=${signer.country}, emailAddress=${signer.email}"
 
     certificateRequest.stepUpAuthorisation.phone.setFor(signer, name)
@@ -30,7 +30,7 @@ fun RootSignRequest.createSignRequestForName(signer: User, name: String) {
  */
 fun Phone.setFor(signer: User, name: String) {
     language = signer.locale
-    phoneNumber = signer.phone
+    phoneNumber = signer.phoneNo
     message = "Please confirm the signing of the document: $name"
     serialNumber = signer.id.toString()
 }

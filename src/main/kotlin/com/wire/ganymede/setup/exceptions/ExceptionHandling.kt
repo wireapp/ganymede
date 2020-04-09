@@ -20,7 +20,7 @@ fun Application.registerExceptionHandlers() {
             call.respond(HttpStatusCode.ServiceUnavailable)
         }
 
-        exception<DataValidationException> { cause ->
+        exception<SwisscomDataValidationException> { cause ->
             logger.error { "Malformed data received! ${cause.message}" }
 
             call.respond(status = HttpStatusCode.BadRequest) {
