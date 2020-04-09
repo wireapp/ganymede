@@ -30,6 +30,7 @@ fun Routing.signingRoute(k: LazyKodein) {
         runCatching {
             call.receive<SignRequest>()
         }.onFailure {
+            routingLogger.warn(it) { "It was not possible tor received SignRequest." }
             call.respond(HttpStatusCode.BadRequest, mapOf("message" to "Malformed SignRequest."))
         }.onSuccess {
             val response = service.sign(
