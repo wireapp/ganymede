@@ -19,6 +19,11 @@ class SwisscomUnavailableException(statusCode: HttpStatusCode, receivedText: Str
     Exception("Swisscom status code: $statusCode with explanation: ${receivedText ?: "no text received"}.")
 
 /**
- * Exception thrown when client does not received valid data.
+ * Exception thrown when wire client does not received data.
  */
-class WireInternalAPIException(message: String?, cause: Throwable) : Exception(message, cause)
+class WireInternalUnavailableException(message: String?, cause: Throwable?) : Exception(message, cause)
+
+/**
+ * Exception thrown when wire client received invalid data.
+ */
+class WireInternalMalformedDataException(message: String?, cause: Throwable?) : Exception(message, cause)

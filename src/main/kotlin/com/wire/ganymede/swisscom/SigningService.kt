@@ -3,7 +3,6 @@ package com.wire.ganymede.swisscom
 import com.wire.ganymede.internal.WireInternalClient
 import com.wire.ganymede.internal.model.SignResponse
 import com.wire.ganymede.internal.model.Signature
-import com.wire.ganymede.setup.exceptions.ServiceUnavailableException
 import com.wire.ganymede.setup.exceptions.SwisscomDataValidationException
 import mu.KLogging
 import java.util.UUID
@@ -47,7 +46,7 @@ class SigningService(private val swisscomClient: SwisscomClient, private val wir
         val response = swisscomClient.pending(responseId)
         logger.debug { "Response received. Response is ${if (response != null) "present" else "null!"}" }
 
-        val signature = response?.signature ?: throw ServiceUnavailableException("Signature was not set!")
+        val signature = response?.signature ?: throw SwisscomDataValidationException("Signature was not set!")
         logger.debug { "Signature exists." }
         val signatureObject = signature.other?.signatureObjects?.extendedSignatureObject
 
