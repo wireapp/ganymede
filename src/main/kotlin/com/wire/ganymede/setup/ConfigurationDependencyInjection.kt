@@ -17,8 +17,8 @@ private val logger = KLogging().logger("EnvironmentLoaderLogger")
 /**
  * Loads the DI container with configuration from the system environment.
  */
-fun MainBuilder.bindConfiguration() {
-    val props = loadProperties(getEnv("PROPS_PATH"))
+fun MainBuilder.bindConfiguration(defaultProperties: Properties? = null) {
+    val props = defaultProperties ?: loadProperties(getEnv("PROPS_PATH"))
 
     bind<KeyStoreConfiguration>() with singleton {
         val storePass = loadConfiguration(EnvConfigVariables.STORE_PASS, props)

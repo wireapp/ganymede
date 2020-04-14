@@ -5,7 +5,7 @@ import com.wire.ganymede.routing.auth.userUuid
 import com.wire.ganymede.routing.requests.SignRequest
 import com.wire.ganymede.swisscom.SigningService
 import io.ktor.application.call
-import io.ktor.http.HttpStatusCode
+import io.ktor.features.BadRequestException
 import io.ktor.request.receive
 import io.ktor.response.respond
 import io.ktor.routing.Routing
@@ -25,13 +25,13 @@ fun Routing.signingRoute(k: LazyKodein) {
      * Sign request.
      */
     post("/request") {
-        val userId = userUuid() ?: return@post
+        val userId = userUuid()
 
         runCatching {
             call.receive<SignRequest>()
         }.onFailure {
             routingLogger.warn(it) { "It was not possible tor received SignRequest." }
-            call.respond(HttpStatusCode.BadRequest, mapOf("message" to "Malformed SignRequest."))
+            throw BadRequestException("Malformed SignRequest.")
         }.onSuccess {
             val response = service.sign(
                 userId = userId,
@@ -47,17 +47,12 @@ fun Routing.signingRoute(k: LazyKodein) {
      * Sign request.
      */
     post("/pending/{responseId}") {
-        userUuid() ?: return@post
+        userUuid()
 
         val responseId = call.parameters["responseId"]
-
         when {
-            responseId == null -> call.respond(status = HttpStatusCode.BadRequest) {
-                mapOf("message" to "No response ID provided.")
-            }
-            !isUUID(responseId) -> call.respond(status = HttpStatusCode.BadRequest) {
-                mapOf("message" to "Provided responseId ($responseId) is not valid UUID.")
-            }
+            responseId == null -> throw BadRequestException("No response ID provided.")
+            !isUUID(responseId) -> throw BadRequestException("Provided responseId ($responseId) is not valid UUID.")
             else -> {
                 val response = service.pending(UUID.fromString(responseId))
                 call.respond { response }

@@ -1,7 +1,6 @@
 package com.wire.ganymede.swisscom
 
 import com.wire.ganymede.internal.model.User
-import com.wire.ganymede.setup.exceptions.SwisscomDataValidationException
 import com.wire.ganymede.setup.exceptions.SwisscomUnavailableException
 import com.wire.ganymede.swisscom.model.RootPendingRequest
 import com.wire.ganymede.swisscom.model.RootSignRequest
@@ -14,7 +13,6 @@ import com.wire.ganymede.utils.appendPath
 import com.wire.ganymede.utils.parseJson
 import io.ktor.client.HttpClient
 import io.ktor.client.call.receive
-import io.ktor.client.request.accept
 import io.ktor.client.request.post
 import io.ktor.client.request.url
 import io.ktor.client.statement.HttpResponse
@@ -27,6 +25,8 @@ import java.util.UUID
 
 /**
  * Client class which provides connection to Swisscom API.
+ * This service can in some cases return invalid or nul data.
+ * Second value of the pair are data received from the Swisscom API.
  */
 class SwisscomClient(private val client: HttpClient, apiConfig: SwisscomAPIConfig) {
 
@@ -38,13 +38,15 @@ class SwisscomClient(private val client: HttpClient, apiConfig: SwisscomAPIConfi
     /**
      * Issues sign request.
      */
-    suspend fun sign(signer: User, documentId: String, hash: String, name: String): SignResponse? {
+    suspend fun sign(signer: User, documentId: String, documentHash: String, documentName: String)
+            : Pair<SignResponse?, SwisscomApiResponse> {
         logger.debug { "Sign request - building object for the Swisscom API." }
         val request = RootSignRequest().apply {
-            hashDocument(hash, documentId)
-            createSignRequestForName(signer, name)
+            hashDocument(documentHash, documentId)
+            createSignRequestForName(signer, documentName)
         }
         logger.debug { "Document prepared, executing." }
+
         return resolveRequest(request, signUrl)
             .also { logger.debug { "Sign request resolved." } }
     }
@@ -52,31 +54,27 @@ class SwisscomClient(private val client: HttpClient, apiConfig: SwisscomAPIConfi
     /**
      * Issues pending request.
      */
-    suspend fun pending(responseId: UUID): SignResponse? {
+    suspend fun pending(responseId: UUID): Pair<SignResponse?, SwisscomApiResponse> {
         logger.debug { "Sending pending request." }
         return resolveRequest(RootPendingRequest(responseId), pendingUrl)
             .also { logger.debug { "Pending request resolved." } }
     }
 
-    private suspend fun <T : Any> resolveRequest(body: T, url: String): SignResponse? {
+    private suspend fun <T : Any> resolveRequest(body: T, url: String): Pair<SignResponse?, SwisscomApiResponse> {
         logger.debug { "Executing request to Swisscom" }
 
         val result = client.post<HttpStatement>(body = body) {
             url(url)
             contentType(ContentType.Application.Json)
-            accept(ContentType.Application.Json)
         }.execute()
         logger.debug { "Request status: ${result.status}. Parsing received data." }
 
-        val (signResponse, text) = tryParse<RootSignResponse>(result)
-        if (signResponse == null) {
-            throw SwisscomDataValidationException("It was not possible to parse RootSignResponse, received message: $text")
-        }
+        val (signResponse, apiResponse) = tryParse<RootSignResponse>(result)
 
-        return signResponse.signResponse
+        return signResponse?.signResponse to apiResponse
     }
 
-    private suspend inline fun <reified T : Any> tryParse(response: HttpResponse): Pair<T?, String> =
+    private suspend inline fun <reified T : Any> tryParse(response: HttpResponse): Pair<T?, SwisscomApiResponse> =
         when {
             // Swisscom is not using http codes to indicate result of the request
             response.status.isSuccess() -> {

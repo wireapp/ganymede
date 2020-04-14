@@ -151,3 +151,4 @@ modules.xml
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 
 # End of https://www.gitignore.io/api/java,kotlin,jetbrains+all
+testing.properties

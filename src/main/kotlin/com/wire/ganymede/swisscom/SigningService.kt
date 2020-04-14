@@ -10,6 +10,7 @@ import java.util.UUID
 
 /**
  * Service used for signing the documents.
+ * This service returns always valid data, otherwise exception is thrown.
  */
 class SigningService(private val swisscomClient: SwisscomClient, private val wireClient: WireInternalClient) {
 
@@ -30,17 +31,18 @@ class SigningService(private val swisscomClient: SwisscomClient, private val wir
      */
     suspend fun sign(user: User, documentId: String, documentHash: String, documentName: String): SignResponse {
         logger.debug { "Sign request to swisscom." }
-        val signResponse = swisscomClient
-            .sign(user, documentId = documentId, hash = documentHash, name = documentName)
-        logger.debug { "Response is ${if (signResponse != null) "present" else "null!"}" }
+        val (parsedResponse, rawData) = swisscomClient
+            .sign(user, documentId = documentId, documentHash = documentHash, documentName = documentName)
+        logger.debug { "Response received" }
+        val signResponse = rawData.assureNotNull(parsedResponse) { "It was not possible to parse RootSignResponse!" }
 
-        val outputs = assureNotNull(signResponse?.optionalOutputs) {
-            signResponse?.result?.minor ?: "No data received from Swisscom!"
+        val outputs = rawData.assureNotNull(signResponse.optionalOutputs) {
+            signResponse.result?.minor ?: "No data received from Swisscom!"
         }
 
         logger.debug { "Building sign response." }
         return SignResponse(
-            responseId = assureNotNull(outputs.responseId) { "Response ID was not set! This is not valid request." },
+            responseId = rawData.assureNotNull(outputs.responseId) { "Response ID was not set! This is not valid request." },
             consentURL = outputs.stepUpAuthorisationInfo?.result?.url
         )
     }
@@ -50,27 +52,28 @@ class SigningService(private val swisscomClient: SwisscomClient, private val wir
      */
     suspend fun pending(responseId: UUID): Signature {
         logger.debug { "Pending request to swisscom." }
-        val response = swisscomClient.pending(responseId)
-        logger.debug { "Response received. Response is ${if (response != null) "present" else "null!"}" }
+        val (parsedResponse, rawData) = swisscomClient.pending(responseId)
+        logger.debug { "Response received" }
+        val pendingResponse = rawData.assureNotNull(parsedResponse) { "It was not possible to parse RootSignResponse!" }
 
-        val signature = response?.signature ?: throw SwisscomDataValidationException("Signature was not set!")
+        val signature = rawData.assureNotNull(pendingResponse.signature) { "Signature was not set!" }
         logger.debug { "Signature exists." }
         val signatureObject = signature.other?.signatureObjects?.extendedSignatureObject
 
         logger.debug { "SignatureObject ${if (signatureObject != null) "exists" else "is null!"}" }
         return Signature(
-            documentId = assureNotNull(signatureObject?.documentId) { "Document id from signature object can not be null!" },
-            cms = assureNotNull(signatureObject?.base64Signature?.value) { "CMS or base64Signature can not be null!" }
+            documentId = rawData.assureNotNull(signatureObject?.documentId) { "Document id from signature object can not be null!" },
+            cms = rawData.assureNotNull(signatureObject?.base64Signature?.value) { "CMS or base64Signature can not be null!" }
         )
     }
 
     /**
      * Throws [SwisscomDataValidationException] on null input.
      */
-    private inline fun <T : Any> assureNotNull(value: T?, lazyMessage: () -> Any): T {
+    private inline fun <T : Any> SwisscomApiResponse.assureNotNull(value: T?, lazyMessage: () -> Any): T {
         if (value == null) {
             val message = lazyMessage()
-            throw SwisscomDataValidationException(message.toString())
+            throw SwisscomDataValidationException(message.toString(), this)
         } else {
             return value
         }

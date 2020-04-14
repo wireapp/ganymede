@@ -7,7 +7,6 @@ import java.util.UUID
 /**
  * Code taken from Java repo. Maybe to be cleaned up in the future.
  * */
-
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class User(
     val id: UUID,
@@ -17,8 +16,6 @@ data class User(
     val email: String,
 
     val phoneNo: String?,
-
-    val handle: String?,
 
     val locale: String = "en-US",
 

@@ -4,7 +4,6 @@ import com.wire.ganymede.internal.WireInternalClient
 import com.wire.ganymede.swisscom.SigningService
 import com.wire.ganymede.swisscom.SwisscomClient
 import io.ktor.client.HttpClient
-import io.ktor.util.KtorExperimentalAPI
 import io.micrometer.prometheus.PrometheusConfig
 import io.micrometer.prometheus.PrometheusMeterRegistry
 import mu.KLogger
@@ -14,7 +13,6 @@ import org.kodein.di.generic.bind
 import org.kodein.di.generic.instance
 import org.kodein.di.generic.singleton
 
-@KtorExperimentalAPI
 fun MainBuilder.configureContainer() {
 
     bind<HttpClient>() with singleton {

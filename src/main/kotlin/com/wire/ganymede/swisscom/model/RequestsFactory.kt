@@ -32,5 +32,6 @@ fun Phone.setFor(signer: User, name: String) {
     language = signer.locale
     phoneNumber = signer.phoneNo
     message = "Please confirm the signing of the document: $name"
-    serialNumber = signer.id.toString()
+    // TODO find out whether to set or not to set serial number
+//    serialNumber = signer.id.toString()
 }
