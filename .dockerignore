@@ -7,3 +7,4 @@ Makefile
 .gradle/
 .idea/
 build/
+testing.properties
