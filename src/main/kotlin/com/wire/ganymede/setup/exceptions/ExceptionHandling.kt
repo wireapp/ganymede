@@ -1,7 +1,7 @@
 package com.wire.ganymede.setup.exceptions
 
 import ai.blindspot.ktoolz.extensions.newLine
-import com.wire.ganymede.utils.prettyPrintJson
+import ai.blindspot.ktoolz.extensions.prettyPrintJson
 import io.ktor.application.Application
 import io.ktor.application.ApplicationCall
 import io.ktor.application.call

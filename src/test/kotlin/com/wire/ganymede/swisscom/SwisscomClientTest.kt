@@ -1,12 +1,11 @@
 package com.wire.ganymede.swisscom
 
+import ai.blindspot.ktoolz.extensions.hashWith256
 import io.ktor.client.HttpClient
 import io.ktor.client.request.get
 import kotlinx.coroutines.runBlocking
 import mu.KLogging
 import org.kodein.di.generic.instance
-import java.security.MessageDigest
-import java.util.Base64
 import java.util.UUID
 import kotlin.test.Ignore
 import kotlin.test.Test
@@ -62,8 +61,5 @@ class SwisscomClientTest {
 
 fun Any.hashResource(documentName: String): String {
     val bytes = this::class.java.getResourceAsStream(documentName).readBytes()
-    val hashedArray = MessageDigest
-        .getInstance("SHA-256")
-        .digest(bytes)
-    return Base64.getEncoder().encodeToString(hashedArray)
+    return hashWith256(bytes)
 }

@@ -1,5 +1,6 @@
 package com.wire.ganymede.swisscom
 
+import ai.blindspot.ktoolz.extensions.parseJson
 import com.wire.ganymede.internal.model.User
 import com.wire.ganymede.setup.exceptions.SwisscomUnavailableException
 import com.wire.ganymede.swisscom.model.RootPendingRequest
@@ -10,7 +11,6 @@ import com.wire.ganymede.swisscom.model.SwisscomAPIConfig
 import com.wire.ganymede.swisscom.model.createSignRequestForName
 import com.wire.ganymede.swisscom.model.hashDocument
 import com.wire.ganymede.utils.appendPath
-import com.wire.ganymede.utils.parseJson
 import io.ktor.client.HttpClient
 import io.ktor.client.call.receive
 import io.ktor.client.request.post
