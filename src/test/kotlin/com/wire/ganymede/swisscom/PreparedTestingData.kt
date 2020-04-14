@@ -1,18 +1,10 @@
 package com.wire.ganymede.swisscom
 
 import com.wire.ganymede.internal.model.User
-import com.wire.ganymede.setup.bindConfiguration
-import com.wire.ganymede.setup.configureContainer
-import org.kodein.di.Kodein
 import java.util.Properties
 import java.util.UUID
 
-class ConfigurationLoader {
-
-    val k = Kodein.direct {
-        bindConfiguration()
-        configureContainer()
-    }
+class PreparedTestingData : KodeinTestBase() {
 
     val testingUser by lazy {
         User(
@@ -31,7 +23,7 @@ class ConfigurationLoader {
 
     private val props by lazy {
         Properties().also {
-            val resource = ConfigurationLoader::class.java.getResourceAsStream("testing.properties")
+            val resource = PreparedTestingData::class.java.getResourceAsStream("testing.properties")
             requireNotNull(resource) { "File testing.properties must be present for correct integration testing!" }
             it.load(resource)
         }
