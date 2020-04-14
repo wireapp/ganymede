@@ -9,5 +9,6 @@ data class SignResponse(
 
 data class Signature(
     val documentId: String,
-    val cms: String
+    val cms: String,
+    val serialNumber: String?
 )

@@ -1,5 +1,6 @@
 package com.wire.ganymede.swisscom
 
+import ai.blindspot.ktoolz.extensions.whenNull
 import com.wire.ganymede.internal.WireInternalClient
 import com.wire.ganymede.internal.model.SignResponse
 import com.wire.ganymede.internal.model.Signature
@@ -63,7 +64,10 @@ class SigningService(private val swisscomClient: SwisscomClient, private val wir
         logger.debug { "SignatureObject ${if (signatureObject != null) "exists" else "is null!"}" }
         return Signature(
             documentId = rawData.assureNotNull(signatureObject?.documentId) { "Document id from signature object can not be null!" },
-            cms = rawData.assureNotNull(signatureObject?.base64Signature?.value) { "CMS or base64Signature can not be null!" }
+            cms = rawData.assureNotNull(signatureObject?.base64Signature?.value) { "CMS or base64Signature can not be null!" },
+            serialNumber = pendingResponse.optionalOutputs?.stepUpAuthorisationInfo?.result?.serialNumber.whenNull {
+                logger.warn { "Serial number for response $responseId was not set." }
+            }
         )
     }
 
