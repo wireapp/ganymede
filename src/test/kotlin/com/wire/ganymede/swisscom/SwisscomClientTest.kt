@@ -26,7 +26,7 @@ class SwisscomClientTest : KodeinTestBase() {
             client.sign(signer = user, documentId = preparedData.documentId, documentHash = documentHash, documentName = documentName)
         }
 
-        logger.info { prettyPrintJson(rawData) }
+        logger.info { "\n\n${prettyPrintJson(rawData)}\n" }
         assertNotNull(signResponse)
     }
 
@@ -38,7 +38,8 @@ class SwisscomClientTest : KodeinTestBase() {
         val (signResponse, rawData) = runBlocking {
             client.pending(id)
         }
-        logger.info { prettyPrintJson(rawData) }
+
+        logger.info { "\n\n${prettyPrintJson(rawData)}\n" }
         assertNotNull(signResponse)
     }
 

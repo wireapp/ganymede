@@ -32,7 +32,7 @@ class SigningServiceTest : KodeinTestBase() {
             )
         }
 
-        logger.info { prettyPrintJson(createJson(response)) }
+        logger.info { "\n\n${prettyPrintJson(createJson(response))}\n" }
     }
 
     @Test
@@ -44,6 +44,6 @@ class SigningServiceTest : KodeinTestBase() {
             service.pending(operationId)
         }
 
-        logger.info { prettyPrintJson(createJson(response)) }
+        logger.info { "\n\n${prettyPrintJson(createJson(response))}\n" }
     }
 }
