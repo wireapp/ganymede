@@ -1,0 +1,14 @@
+{
+  "SignResponse": {
+    "@Profile": "http://ais.swisscom.ch/1.1",
+    "@RequestID": "adbb3e42-6960-46bd-a670-f4861a6467bf",
+    "Result": {
+      "ResultMajor": "urn:oasis:names:tc:dss:1.0:resultmajor:ResponderError",
+      "ResultMessage": {
+        "$": "Either ClaimedIdentity 'ais-90days-trial-OTP:OnDemand-Advanced' or SSL certificate check failed",
+        "@xml.lang": "en"
+      },
+      "ResultMinor": "http://ais.swisscom.ch/1.0/resultminor/AuthenticationFailed"
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "Response": {
+    "@Profile": "http://ais.swisscom.ch/1.0",
+    "Result": {
+      "ResultMajor": "urn:oasis:names:tc:dss:1.0:resultmajor:RequesterError",
+      "ResultMessage": {
+        "$": "Unknown ResponseID '1a74653f-21e1-4a74-8c5a-c423ba3f5a0f'",
+        "@xml.lang": "en"
+      },
+      "ResultMinor": "http://ais.swisscom.ch/1.0/resultminor/UnexpectedData"
+    }
+  }
+}

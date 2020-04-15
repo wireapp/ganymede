@@ -1,0 +1,12 @@
+{
+  "SignResponse": {
+    "@Profile": "http://ais.swisscom.ch/1.1",
+    "@RequestID": "c1b691d7-929c-452c-897a-84441fbd8f32",
+    "OptionalOutputs": {
+      "async.ResponseID": "ddb90f57-c406-408e-8541-d645011a22d4"
+    },
+    "Result": {
+      "ResultMajor": "urn:oasis:names:tc:dss:1.0:profiles:asynchronousprocessing:resultmajor:Pending"
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "SignResponse": {
+    "@Profile": "http://ais.swisscom.ch/1.1",
+    "@RequestID": "3cee1fb4-3e85-4069-80d9-0e552009399c",
+    "Result": {
+      "ResultMajor": "http://ais.swisscom.ch/1.0/resultmajor/SubsystemError",
+      "ResultMessage": {
+        "$": "SerialNumber mismatch. We strongly advise to go through the Pre-Signing Process in order to retrieve the actual StepUp SerialNumber",
+        "@xml.lang": "en"
+      },
+      "ResultMinor": "http://ais.swisscom.ch/1.1/resultminor/subsystem/StepUp/SerialNumberMismatch"
+    }
+  }
+}

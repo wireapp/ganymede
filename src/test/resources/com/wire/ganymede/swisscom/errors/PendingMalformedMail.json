@@ -1,0 +1,14 @@
+{
+  "SignResponse": {
+    "@Profile": "http://ais.swisscom.ch/1.1",
+    "@RequestID": "ee33650d-cf8a-4067-a824-370841a006c0",
+    "Result": {
+      "ResultMajor": "urn:oasis:names:tc:dss:1.0:resultmajor:RequesterError",
+      "ResultMessage": {
+        "$": "Distinguished name could not be parsed",
+        "@xml.lang": "en"
+      },
+      "ResultMinor": "http://ais.swisscom.ch/1.0/resultminor/UnexpectedData"
+    }
+  }
+}

@@ -53,7 +53,9 @@ dependencies {
     testImplementation("io.mockk", "mockk", "1.9.3")
     testImplementation(kotlin("test"))
     testImplementation(kotlin("test-junit5"))
-    testRuntimeOnly("org.junit.jupiter", "junit-jupiter-engine", "5.6.2")
+    val junitVersion = "5.6.2"
+    testImplementation("org.junit.jupiter", "junit-jupiter-params", junitVersion)
+    testRuntimeOnly("org.junit.jupiter", "junit-jupiter-engine", junitVersion)
 }
 
 sourceSets {

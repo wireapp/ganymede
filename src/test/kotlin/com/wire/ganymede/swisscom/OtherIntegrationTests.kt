@@ -14,11 +14,6 @@ class OtherIntegrationTests : KodeinTestBase() {
     private companion object : KLogging()
 
     @Test
-    fun `load file to hash`() {
-        assertNotNull(hashResource("TestingFile.pdf"))
-    }
-
-    @Test
     @Ignore("integration test")
     fun `test certificate`() {
         val client = instance<HttpClient>()
