@@ -1,7 +1,7 @@
 <configuration>
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%d{dd/MM/yyyy HH:mm:ss} [%level] %logger{36} - %msg%n</pattern>
+            <pattern>%d{dd/MM/yyyy HH:mm:ss} [%level] [%X{mdc-val}] %logger{36} - %msg%n</pattern>
         </encoder>
     </appender>
 
@@ -17,8 +17,7 @@
         <appender-ref ref="STDERR"/>
     </root>
 
-    <logger name="org.eclipse.jetty" level="INFO"/>
     <logger name="io.netty" level="INFO"/>
+    <logger name="com.wire" level="DEBUG"/>
 
-    <logger name="com.wire" level="INFO"/>
 </configuration>

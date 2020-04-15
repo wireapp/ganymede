@@ -1,8 +1,8 @@
 package com.wire.ganymede.routing
 
 import ai.blindspot.ktoolz.extensions.isUUID
-import com.wire.ganymede.routing.auth.userUuid
 import com.wire.ganymede.routing.requests.SignRequest
+import com.wire.ganymede.setup.auth.userUuid
 import com.wire.ganymede.swisscom.SigningService
 import io.ktor.application.call
 import io.ktor.features.BadRequestException

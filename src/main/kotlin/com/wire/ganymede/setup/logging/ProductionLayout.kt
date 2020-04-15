@@ -14,9 +14,14 @@ class ProductionLayout : LayoutBase<ILoggingEvent>() {
         with(StringBuffer(128)) {
             append("|")
             append(String.format("level=%.1s", event.level.levelStr))
+
+            event.mdcPropertyMap[USER_ID]?.let {
+                append(",user=${it}")
+            }
+
             append("|")
             append(event.loggerName)
-            append("|")
+            append(" - ")
             append(event.formattedMessage)
             append(CoreConstants.LINE_SEPARATOR)
             toString()
