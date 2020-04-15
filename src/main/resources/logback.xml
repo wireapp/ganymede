@@ -5,8 +5,16 @@
         </encoder>
     </appender>
 
+    <appender name="STDERR" class="ch.qos.logback.core.ConsoleAppender">
+        <target>System.err</target>
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="com.wire.ganymede.setup.logging.ProductionLayout"/>
+        </encoder>
+    </appender>
+
     <root level="INFO">
         <appender-ref ref="STDOUT"/>
+        <appender-ref ref="STDERR"/>
     </root>
 
     <logger name="org.eclipse.jetty" level="INFO"/>
