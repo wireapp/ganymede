@@ -1,7 +1,6 @@
 package com.wire.ganymede.setup.exceptions
 
-import ai.blindspot.ktoolz.extensions.newLine
-import ai.blindspot.ktoolz.extensions.prettyPrintJson
+import com.wire.ganymede.swisscom.errors.dataValidationExceptionHandler
 import io.ktor.application.Application
 import io.ktor.application.ApplicationCall
 import io.ktor.application.call
@@ -34,13 +33,7 @@ fun Application.registerExceptionHandlers() {
             call.errorResponse(HttpStatusCode.ServiceUnavailable, cause.message)
         }
 
-        exception<SwisscomDataValidationException> { cause ->
-            logger.error(cause) {
-                "Malformed data received from Swisscom API.! ${cause.message} Invalid JSON:$newLine" +
-                        "${cause.json?.let { prettyPrintJson(it) }}"
-            }
-            call.errorResponse(HttpStatusCode.ServiceUnavailable, cause.message)
-        }
+        dataValidationExceptionHandler()
 
         exception<SwisscomUnavailableException> { cause ->
             logger.error(cause) { "Swisscom API is not available. ${cause.message}" }
@@ -59,7 +52,7 @@ fun Application.registerExceptionHandlers() {
     }
 }
 
-private suspend inline fun ApplicationCall.errorResponse(statusCode: HttpStatusCode, message: String?) {
+suspend inline fun ApplicationCall.errorResponse(statusCode: HttpStatusCode, message: String?) {
     respond(status = statusCode) {
         mapOf("message" to (message ?: "No details specified"))
     }
