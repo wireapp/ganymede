@@ -74,7 +74,7 @@ fun Application.installFrameworks(k: LazyKodein) {
         }
     }
 
-    registerExceptionHandlers()
+    registerExceptionHandlers(k)
 
     val prometheusRegistry by k.instance<PrometheusMeterRegistry>()
     install(MicrometerMetrics) {

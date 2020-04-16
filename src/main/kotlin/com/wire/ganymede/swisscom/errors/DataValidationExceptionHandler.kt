@@ -5,11 +5,13 @@ import ai.blindspot.ktoolz.extensions.prettyPrintJson
 import ai.blindspot.ktoolz.extensions.whenNull
 import com.wire.ganymede.setup.exceptions.SwisscomDataValidationException
 import com.wire.ganymede.setup.exceptions.errorResponse
+import com.wire.ganymede.utils.countException
 import io.ktor.application.ApplicationCall
 import io.ktor.application.call
 import io.ktor.features.StatusPages
 import io.ktor.http.HttpStatusCode
 import io.ktor.response.respond
+import io.micrometer.core.instrument.MeterRegistry
 import kotlinx.coroutines.delay
 import mu.KLogging
 
@@ -18,13 +20,16 @@ private val logger = KLogging().logger("DataValidationExceptionHandler")
 /**
  * More complicated error handling when data received from the Swisscom are incorrect.
  */
-fun StatusPages.Configuration.dataValidationExceptionHandler() {
+fun StatusPages.Configuration.dataValidationExceptionHandler(registry: MeterRegistry) {
     exception<SwisscomDataValidationException> { cause ->
         cause.json?.let {
-            call.respond(cause, guessError(it))
+            val guess = guessError(it)
+            call.respond(cause, guess)
+            registry.countException(cause, mapOf("reason" to guess.response.reasoning))
         }.whenNull {
             logger.error(cause) { "No data received from Swisscom API.! ${cause.message}." }
             call.errorResponse(HttpStatusCode.ServiceUnavailable, cause.message)
+            registry.countException(cause)
         }
     }
 }
