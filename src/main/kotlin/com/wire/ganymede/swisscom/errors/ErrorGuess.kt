@@ -65,7 +65,7 @@ private fun ResultNode.requesterError(): SwisscomResponse? =
             message.startsWith("Distinguished name could not be parsed", true) ->
                 SignWithMalformedMail(message)
             message.startsWith("Unknown ResponseID", true) ->
-                ExpiredRequestIdUsed(message)
+                InvalidRequestIdUsed(message)
             else -> null
         }
     }

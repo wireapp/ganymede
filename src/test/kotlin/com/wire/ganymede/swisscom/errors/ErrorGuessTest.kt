@@ -20,7 +20,7 @@ class ErrorGuessTest {
                 Arguments.of("MalformedMail.json", SignWithMalformedMail::class),
                 Arguments.of("PendingMalformedMail.json", SignWithMalformedMail::class),
                 Arguments.of("PendingResponse.json", ResourceStillInPendingState::class),
-                Arguments.of("PendingWithExpiredRequestId.json", ExpiredRequestIdUsed::class),
+                Arguments.of("PendingWithExpiredRequestId.json", InvalidRequestIdUsed::class),
                 Arguments.of("WrongSerialNumber.json", SignWithWrongSerialNumber::class)
             )
         }

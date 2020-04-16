@@ -50,8 +50,8 @@ data class ResourceStillInPendingState(
     override val finalStatusCode: HttpStatusCode = HttpStatusCode.ServiceUnavailable
 ) : SwisscomResponse()
 
-data class ExpiredRequestIdUsed(
+data class InvalidRequestIdUsed(
     override val swisscomMessage: String?,
-    override val reasoning: String = "Provided request id is expired.",
+    override val reasoning: String = "Provided request id is expired or does not exist.",
     override val finalStatusCode: HttpStatusCode = HttpStatusCode.BadRequest
 ) : SwisscomResponse()

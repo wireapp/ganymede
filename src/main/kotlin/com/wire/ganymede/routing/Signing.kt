@@ -55,7 +55,7 @@ fun Routing.signingRoute(k: LazyKodein) {
             !isUUID(responseId) -> throw BadRequestException("Provided responseId ($responseId) is not valid UUID.")
             else -> {
                 val response = service.pending(UUID.fromString(responseId))
-                call.respond { response }
+                call.respond(response)
             }
         }
     }

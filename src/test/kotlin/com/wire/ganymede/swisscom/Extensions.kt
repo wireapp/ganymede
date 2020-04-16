@@ -1,8 +1,9 @@
 package com.wire.ganymede.swisscom
 
 import ai.blindspot.ktoolz.extensions.hashWith256
+import mu.KLogging
 import kotlin.test.Test
-import kotlin.test.assertNotNull
+import kotlin.test.assertTrue
 
 /**
  * Creates hash from given resource.
@@ -13,8 +14,13 @@ fun Any.hashResource(documentName: String): String {
 }
 
 class ExtensionsTests {
+
+    private companion object : KLogging()
+
     @Test
     fun `load file to hash`() {
-        assertNotNull(hashResource("TestingFile.pdf"))
+        val hash = hashResource("TestingFile.pdf")
+        assertTrue { hash.isNotEmpty() }
+        logger.info { hash }
     }
 }
