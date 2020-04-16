@@ -49,11 +49,14 @@ fun Application.registerExceptionHandlers() {
             logger.error(cause) { "Wire internal API returned invalid data. ${cause.message}" }
             call.errorResponse(HttpStatusCode.ServiceUnavailable, cause.message)
         }
+
+        exception<Exception> { cause ->
+            logger.error(cause) { "Exception occurred in the application: ${cause.message}" }
+            call.errorResponse(HttpStatusCode.InternalServerError, cause.message)
+        }
     }
 }
 
 suspend inline fun ApplicationCall.errorResponse(statusCode: HttpStatusCode, message: String?) {
-    respond(status = statusCode) {
-        mapOf("message" to (message ?: "No details specified"))
-    }
+    respond(status = statusCode, message = mapOf("message" to (message ?: "No details specified")))
 }
