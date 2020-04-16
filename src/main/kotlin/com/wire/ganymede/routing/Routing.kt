@@ -1,5 +1,6 @@
 package com.wire.ganymede.routing
 
+import com.wire.ganymede.utils.createLogger
 import io.ktor.application.call
 import io.ktor.client.HttpClient
 import io.ktor.client.request.get
@@ -9,11 +10,10 @@ import io.ktor.http.HttpStatusCode
 import io.ktor.response.respond
 import io.ktor.routing.Routing
 import io.ktor.routing.get
-import mu.KLogging
 import org.kodein.di.LazyKodein
 import org.kodein.di.generic.instance
 
-internal val routingLogger by lazy { KLogging().logger("RoutingLogger") }
+internal val routingLogger by lazy { createLogger("RoutingLogger") }
 
 /**
  * Register routes to the KTor.

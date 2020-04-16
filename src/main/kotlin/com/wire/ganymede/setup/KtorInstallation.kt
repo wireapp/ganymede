@@ -5,6 +5,7 @@ import com.wire.ganymede.routing.registerRoutes
 import com.wire.ganymede.setup.auth.AUTH_HEADER
 import com.wire.ganymede.setup.exceptions.registerExceptionHandlers
 import com.wire.ganymede.setup.logging.USER_ID
+import com.wire.ganymede.utils.createLogger
 import io.ktor.application.Application
 import io.ktor.application.install
 import io.ktor.features.CallId
@@ -20,7 +21,6 @@ import io.ktor.util.KtorExperimentalAPI
 import io.micrometer.core.instrument.distribution.DistributionStatisticConfig
 import io.micrometer.prometheus.PrometheusMeterRegistry
 import mu.KLogger
-import mu.KLogging
 import org.kodein.di.LazyKodein
 import org.kodein.di.generic.instance
 import org.kodein.di.ktor.kodein
@@ -64,7 +64,7 @@ fun Application.installFrameworks(k: LazyKodein) {
 
     install(CallLogging) {
         level = Level.DEBUG
-        logger = KLogging().logger("com.wire.HttpCallLogger")
+        logger = createLogger("HttpCallLogger")
         callIdMdc(USER_ID)
     }
 

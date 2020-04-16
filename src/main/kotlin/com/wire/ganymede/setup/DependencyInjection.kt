@@ -3,11 +3,11 @@ package com.wire.ganymede.setup
 import com.wire.ganymede.internal.WireInternalClient
 import com.wire.ganymede.swisscom.SigningService
 import com.wire.ganymede.swisscom.SwisscomClient
+import com.wire.ganymede.utils.createLogger
 import io.ktor.client.HttpClient
 import io.micrometer.prometheus.PrometheusConfig
 import io.micrometer.prometheus.PrometheusMeterRegistry
 import mu.KLogger
-import mu.KLogging
 import org.kodein.di.Kodein.MainBuilder
 import org.kodein.di.generic.bind
 import org.kodein.di.generic.instance
@@ -32,6 +32,6 @@ fun MainBuilder.configureContainer() {
     bind<SigningService>() with singleton { SigningService(instance(), instance()) }
     bind<SwisscomClient>() with singleton { SwisscomClient(instance(), instance()) }
 
-    bind<KLogger>("routing-logger") with singleton { KLogging().logger("Routing") }
-    bind<KLogger>("install-logger") with singleton { KLogging().logger("KtorStartup") }
+    bind<KLogger>("routing-logger") with singleton { createLogger("Routing") }
+    bind<KLogger>("install-logger") with singleton { createLogger("KtorStartup") }
 }
