@@ -1,7 +1,7 @@
 package com.wire.ganymede.swisscom
 
 import ai.blindspot.ktoolz.extensions.whenNull
-import com.wire.ganymede.internal.WireInternalClient
+import com.wire.ganymede.internal.WireClient
 import com.wire.ganymede.internal.model.SignResponse
 import com.wire.ganymede.internal.model.Signature
 import com.wire.ganymede.internal.model.User
@@ -13,7 +13,7 @@ import java.util.UUID
  * Service used for signing the documents.
  * This service returns always valid data, otherwise exception is thrown.
  */
-class SigningService(private val swisscomClient: SwisscomClient, private val wireClient: WireInternalClient) {
+class SigningService(private val swisscomClient: SwisscomClient, private val wireClient: WireClient) {
 
     private companion object : KLogging()
 

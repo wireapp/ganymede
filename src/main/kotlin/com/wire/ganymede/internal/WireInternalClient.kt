@@ -15,7 +15,7 @@ import java.util.UUID
 /**
  * Client for internal Wire API.
  */
-class WireInternalClient(private val client: HttpClient, apiConfig: WireAPIConfig) {
+class WireInternalClient(private val client: HttpClient, apiConfig: WireAPIConfig) : WireClient {
 
     private companion object : KLogging()
 
@@ -24,7 +24,7 @@ class WireInternalClient(private val client: HttpClient, apiConfig: WireAPIConfi
     /**
      * Obtains user information for the given userId.
      */
-    suspend fun getUser(userId: UUID): User =
+    override suspend fun getUser(userId: UUID): User =
         runCatching {
             logger.debug { "Fetching data for the userId $userId " }
 

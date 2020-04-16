@@ -1,5 +1,7 @@
 package com.wire.ganymede.setup
 
+import com.wire.ganymede.internal.DisconnectedWireClient
+import com.wire.ganymede.internal.WireClient
 import com.wire.ganymede.internal.WireInternalClient
 import com.wire.ganymede.swisscom.SigningService
 import com.wire.ganymede.swisscom.SwisscomClient
@@ -28,6 +30,9 @@ fun MainBuilder.configureContainer() {
     }
 
     bind<WireInternalClient>() with singleton { WireInternalClient(instance(), instance()) }
+    bind<DisconnectedWireClient>() with singleton { DisconnectedWireClient() }
+
+    bind<WireClient>() with singleton { instance<WireInternalClient>() }
 
     bind<SigningService>() with singleton { SigningService(instance(), instance()) }
     bind<SwisscomClient>() with singleton { SwisscomClient(instance(), instance()) }
