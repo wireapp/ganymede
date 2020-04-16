@@ -2,10 +2,6 @@ package com.wire.ganymede.routing
 
 import com.wire.ganymede.utils.createLogger
 import io.ktor.application.call
-import io.ktor.client.HttpClient
-import io.ktor.client.request.get
-import io.ktor.content.TextContent
-import io.ktor.http.ContentType
 import io.ktor.http.HttpStatusCode
 import io.ktor.response.respond
 import io.ktor.routing.Routing
@@ -41,20 +37,6 @@ fun Routing.registerRoutes(k: LazyKodein) {
      */
     get("/status") {
         call.respond(HttpStatusCode.OK)
-    }
-
-    /**
-     * Used only for testing certificate validity.
-     *
-     * TODO delete this
-     */
-    get("/certificate-test") {
-        val client by k.instance<HttpClient>()
-        val response = client.get<String>("https://server.cryptomix.com/secure/")
-
-        routingLogger.info { response }
-
-        call.respond(TextContent("ok", ContentType.Text.Plain))
     }
 
     prometheusRoute(k)

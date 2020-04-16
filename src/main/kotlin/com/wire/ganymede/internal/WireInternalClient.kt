@@ -33,7 +33,7 @@ class WireInternalClient(private val client: HttpClient, apiConfig: WireAPIConfi
                 parametersOf("ids", userId.toString())
             }
         }.onSuccess {
-            logger.error { "Request for userId $userId was successful." }
+            logger.debug { "Request for userId $userId was successful." }
         }.onFailure {
             logger.error { "Request for userId $userId failed." }
         }.getOrElse {

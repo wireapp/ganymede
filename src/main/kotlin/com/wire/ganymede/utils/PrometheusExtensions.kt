@@ -1,7 +1,10 @@
 package com.wire.ganymede.utils
 
+import io.ktor.client.statement.HttpResponse
+import io.ktor.client.statement.request
 import io.micrometer.core.instrument.MeterRegistry
 import io.micrometer.core.instrument.Tag
+import java.util.concurrent.TimeUnit
 
 /**
  * Registers exception in the prometheus metrics.
@@ -13,6 +16,22 @@ fun MeterRegistry.countException(exception: Throwable, additionalTags: Map<Strin
     )
     val tags = (baseTags + additionalTags).toTags()
     counter("exceptions", tags).increment()
+}
+
+/**
+ * Register http call.
+ */
+fun MeterRegistry.httpCall(response: HttpResponse) {
+    val startTime = response.requestTime.timestamp
+    val endTime = response.responseTime.timestamp
+
+    val duration = endTime - startTime
+    val tags = mapOf(
+        "code" to response.status.value.toString(),
+        "url" to response.request.url.toString()
+    ).toTags()
+
+    timer("http_calls", tags).record(duration, TimeUnit.MILLISECONDS)
 }
 
 /**

@@ -1,6 +1,5 @@
 package com.wire.ganymede.setup
 
-import io.ktor.client.HttpClient
 import io.ktor.client.features.logging.Logger
 import org.slf4j.LoggerFactory
 
@@ -9,7 +8,7 @@ import org.slf4j.LoggerFactory
  */
 val Logger.Companion.DEBUG: Logger
     get() = object : Logger {
-        private val delegate = LoggerFactory.getLogger(HttpClient::class.java)!!
+        private val delegate = LoggerFactory.getLogger("com.wire.HttpCallsLogging")!!
         override fun log(message: String) {
             delegate.debug(message)
         }

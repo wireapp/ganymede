@@ -1,6 +1,7 @@
 package com.wire.ganymede.setup
 
 import com.wire.ganymede.dto.KeyStoreConfiguration
+import com.wire.ganymede.utils.httpCall
 import io.ktor.client.HttpClient
 import io.ktor.client.HttpClientConfig
 import io.ktor.client.engine.apache.Apache
@@ -10,6 +11,8 @@ import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.features.logging.LogLevel
 import io.ktor.client.features.logging.Logger
 import io.ktor.client.features.logging.Logging
+import io.ktor.client.features.observer.ResponseObserver
+import io.micrometer.core.instrument.MeterRegistry
 import mu.KLogging
 import org.apache.http.ssl.SSLContextBuilder
 import java.io.File
@@ -54,19 +57,22 @@ fun HttpClientConfig<ApacheEngineConfig>.configureCertificates(config: KeyStoreC
 /**
  * Prepares HTTP Client with given keystore.
  */
-fun client(config: KeyStoreConfiguration? = null) =
+fun client(config: KeyStoreConfiguration, meterRegistry: MeterRegistry) =
     HttpClient(Apache) {
         install(JsonFeature) {
             serializer = JacksonSerializer()
         }
 
+        install(ResponseObserver) {
+            onResponse {
+                meterRegistry.httpCall(it)
+            }
+        }
+
         install(Logging) {
-            this.level
             logger = Logger.DEBUG
             level = LogLevel.ALL
         }
 
-        if (config != null) {
-            configureCertificates(config)
-        }
+        configureCertificates(config)
     }

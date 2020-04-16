@@ -18,7 +18,7 @@ import org.kodein.di.generic.singleton
 fun MainBuilder.configureContainer() {
 
     bind<HttpClient>() with singleton {
-        client(instance())
+        client(instance(), instance())
     }
 
     bind<PrometheusMeterRegistry>() with singleton {
