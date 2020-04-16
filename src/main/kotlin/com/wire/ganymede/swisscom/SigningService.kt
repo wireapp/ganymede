@@ -43,8 +43,12 @@ class SigningService(private val swisscomClient: SwisscomClient, private val wir
 
         logger.debug { "Building sign response." }
         return SignResponse(
-            responseId = rawData.assureNotNull(outputs.responseId) { "Response ID was not set! This is not valid request." },
-            consentURL = outputs.stepUpAuthorisationInfo?.result?.url
+            responseId = rawData.assureNotNull(outputs.responseId) {
+                "Response ID was not set! This is not valid request."
+            },
+            consentURL = rawData.assureNotNull(outputs.stepUpAuthorisationInfo?.result?.url) {
+                "Consent URL not set! Request might be invalid"
+            }
         )
     }
 

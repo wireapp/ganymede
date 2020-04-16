@@ -4,7 +4,7 @@ import java.util.UUID
 
 data class SignResponse(
     val responseId: UUID,
-    val consentURL: String?
+    val consentURL: String
 )
 
 data class Signature(
