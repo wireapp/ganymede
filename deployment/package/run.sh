@@ -1,7 +1,7 @@
 #!/bin/bash
 
 config_file=$(pwd)/.env
-store_name=aves.jks
+store_name=swisscom.jks
 
 run() {
   clean
