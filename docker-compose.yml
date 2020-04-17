@@ -10,8 +10,8 @@ services:
     container_name: ganymede
     volumes:
       - ./certificates:/certificates
-    env_file: certificates/my.env
+    env_file: certificates/aves.env
     environment:
-      - STORE_PATH=/certificates/my.jks
+      - STORE_PATH=/certificates/aves.jks
     ports:
       - 8080:8080

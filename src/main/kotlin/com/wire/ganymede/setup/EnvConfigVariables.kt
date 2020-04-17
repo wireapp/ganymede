@@ -20,7 +20,7 @@ enum class EnvConfigVariables {
     STORE_TYPE,
 
     /**
-     * Password for key.
+     * Password for key, if no is provided, STORE_PASS is used.
      */
     KEY_PASS,
 
