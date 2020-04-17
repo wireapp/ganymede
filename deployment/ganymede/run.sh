@@ -1,6 +1,7 @@
 #!/bin/bash
 
 config_file=$(pwd)/.env
+version_file=$(pwd)/version.txt
 store_name=swisscom.jks
 
 run() {
@@ -29,6 +30,7 @@ _EOF_
 start_jar() {
   (
     export PROPS_PATH="$config_file"
+    export RELEASE_FILE_PATH="$version_file"
     java -jar app.jar
   )
 }
