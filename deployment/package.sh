@@ -1,12 +1,22 @@
 #!/bin/bash
 
-output_dir=package
+output_dir=ganymede
 certificate=$output_dir/swisscom.jks
+app=$output_dir/app.jar
+
+output_file=ganymede.tar.gz
 
 run() {
+  clean
   create_certificate
   create_build
   create_tar
+}
+
+clean() {
+  rm "$app" || true
+  rm "$certificate" || true
+  rm "$output_file" || true
 }
 
 create_certificate() {
@@ -17,16 +27,16 @@ create_build() {
   (
     cd ../
     ./gradlew fatJar
-    cp build/libs/app.jar deployment/$output_dir/app.jar
+    cp build/libs/app.jar deployment/$app
   )
 }
 
 create_tar() {
-  tar -zcvf release.tar.gz "$output_dir"
+  tar -zcvf "$output_file" "$output_dir"
 }
 
 usage() {
-  echo "usage: ./package -c <base 64 of certificate>"
+  echo "usage: ./package.sh -c <base 64 of certificate>"
 }
 
 certificate_base=
