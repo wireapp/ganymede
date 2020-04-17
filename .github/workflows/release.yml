@@ -5,7 +5,7 @@ on:
     types: published
 
 jobs:
-  build:
+  docker_release:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -34,7 +34,59 @@ jobs:
         uses: 8398a7/action-slack@v2
         with:
           status: ${{ job.status }}
-          author_name: Ganymede Release Pipeline
+          author_name: Ganymede Docker Release Pipeline
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.WEBHOOK_RELEASE }}
+        # Notify every release
+        if: always()
+
+  on_prem_release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Set envs
+        # use latest tag as release version
+        run: echo ::set-env name=RELEASE_VERSION::${GITHUB_REF:10}
+
+      # sets up jdk
+      - name: Setup JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11.0.3
+
+      # Builds application and creates final archive
+      - name: Create release with package.sh
+        env:
+          CERTIFICATE: ${{ secrets.SWISSCOM_CERTIFICATE }}
+          VERSION: ${{ env.RELEASE_VERSION }}
+        run: |
+          (cd deployment && ./package.sh -v "$VERSION" -c "$CERTIFICATE")
+
+      # Obtains release URL to upload assets
+      - name: Get Release Id
+        id: get_release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: bruceadams/get-release@v1
+
+      # Upload ganymede zip to the releases
+      - name: Upload Ganymede Release
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.get_release.outputs.upload_url }}
+          asset_path: ./deployment/ganymede.tar.gz
+          asset_name: ganymede.tar.gz
+          asset_content_type: application/tar+gzip
+
+      # Send webhook to Wire using Slack Bot
+      - name: Webhook to Wire
+        uses: 8398a7/action-slack@v2
+        with:
+          status: ${{ job.status }}
+          author_name: Ganymede On-Prem Release Pipeline
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.WEBHOOK_RELEASE }}
         # Notify every release
