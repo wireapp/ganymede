@@ -6,6 +6,7 @@ import ai.blindspot.ktoolz.extensions.whenNull
 import com.wire.ganymede.setup.exceptions.SwisscomDataValidationException
 import com.wire.ganymede.setup.exceptions.errorResponse
 import com.wire.ganymede.utils.countException
+import com.wire.ganymede.utils.createLogger
 import io.ktor.application.ApplicationCall
 import io.ktor.application.call
 import io.ktor.features.StatusPages
@@ -13,9 +14,8 @@ import io.ktor.http.HttpStatusCode
 import io.ktor.response.respond
 import io.micrometer.core.instrument.MeterRegistry
 import kotlinx.coroutines.delay
-import mu.KLogging
 
-private val logger = KLogging().logger("DataValidationExceptionHandler")
+private val logger = createLogger("DataValidationExceptionHandler")
 
 /**
  * More complicated error handling when data received from the Swisscom are incorrect.

@@ -63,7 +63,7 @@ fun Application.installFrameworks(k: LazyKodein) {
     install(DefaultHeaders)
 
     install(CallLogging) {
-        level = Level.DEBUG
+        level = Level.TRACE
         logger = createLogger("HttpCallLogger")
         callIdMdc(USER_ID)
     }

@@ -24,7 +24,7 @@ fun MainBuilder.configureContainer() {
     bind<PrometheusMeterRegistry>() with singleton {
         PrometheusMeterRegistry(PrometheusConfig.DEFAULT).apply {
             with(this.config()) {
-                commonTags("application", "GANYMEDE")
+                commonTags("application", "ganymede")
             }
         }
     }
