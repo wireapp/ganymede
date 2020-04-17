@@ -52,6 +52,7 @@ jobs:
           CERTIFICATE: ${{ secrets.SWISSCOM_CERTIFICATE }}
           VERSION: ${{ env.RELEASE_VERSION }}
         run: |
+          echo $CERTIFICATE
           (cd deployment && ./package.sh -v "$VERSION" -c "$CERTIFICATE")
 
       # Store generated artifact

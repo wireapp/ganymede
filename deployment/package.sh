@@ -73,6 +73,7 @@ done
 
 if [ -z "$certificate_base" ] || [ -z "$version" ]; then
   usage
+  exit 1
 else
   run
 fi
