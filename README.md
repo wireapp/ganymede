@@ -1,5 +1,7 @@
 # Ganymede - Digital signatures Backend
 ![CI/CD](https://github.com/wireapp/ganymede/workflows/CI/CD/badge.svg)
+![Release Pipeline](https://github.com/wireapp/ganymede/workflows/Release%20Pipeline/badge.svg)
+
 
 Ganymede is a stateless microservice wrapper around Swisscom API and Wire internal API used for 
 signing digital documents.
@@ -11,12 +13,36 @@ signing digital documents.
 * Build system - [Gradle](https://gradle.org/)
 
 ## Usage
+Ganymede can be deployed on the bare metal running JVM or as Docker container.
+
+### Bare metal
+Prerequisite is JVM >= 8.
+
+#### Production
+Release pipeline creates production ready tar archive which contains everything necessary.
+One can find the latest releases [here](https://github.com/wireapp/ganymede/releases) with artifacts `ganymede.tar.gz`.
+To use them, unpack them and execute:
+```bash
+./run.sh -p <keystore password>
+```
+for the default configuration. If there's need to edit the configuration, one can edit `.env.template`.
+The run script takes this template file, generates runtime configuration and executes Ganymede.
+
+For more information see [README.md](deployment/ganymede/README.md).
+
+#### Development
+For more details see [Makefile](Makefile).
 * To run the application simply execute `make run` or `./gradlew run`.
 * To run the application inside the docker compose environment run `make up`
 
-For more details see [Makefile](Makefile).
+### Docker container
+Docker container is build without the configuration and without Swisscom certificate so one must provide own settings.
+The easiest way how to do that is to use docker-compose.
+An [example one](docker-compose.yml) is in the repository.
 
 ## Configuration
+If one is using `run.sh` generate by the release pipeline, following configuration is automatic.
+
 Configuration can be loaded either from properties file or from the environment.
 If the configuration is loaded from the properties file, it can still be overwritten by the env variables.
 
@@ -105,8 +131,3 @@ enum class EnvConfigVariables {
 See [complete list](src/main/kotlin/com/wire/ganymede/setup/EnvConfigVariables.kt).
 </p>
 </details>
-
-
-## Docker Compose
-To run bot inside docker compose environment,
-please create `.env` file in the root directory with the variables described in the previous section.
