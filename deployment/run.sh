@@ -10,8 +10,7 @@ run() {
   start_jar
 }
 
-clean()
-{
+clean() {
   rm "$config_file" || true
 }
 
@@ -37,7 +36,6 @@ start_jar() {
 usage() {
   echo "usage: ./run.sh -p key_store_password"
 }
-
 
 store_pass=
 
