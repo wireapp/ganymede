@@ -36,9 +36,14 @@ For more details see [Makefile](Makefile).
 * To run the application inside the docker compose environment run `make up`
 
 ### Docker container
-Docker container is build without the configuration and without Swisscom certificate so one must provide own settings.
+[Docker image](https://hub.docker.com/r/lukaswire/ganymede) is build without the configuration 
+and without the Swisscom certificate so for the deployment, one must provide own configuration.
 The easiest way how to do that is to use docker-compose.
 An [example one](docker-compose.yml) is in the repository.
+
+```bash
+lukaswire/ganymede
+```
 
 ## Configuration
 If one is using `run.sh` generate by the release pipeline, following configuration is automatic.
