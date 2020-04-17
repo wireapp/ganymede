@@ -63,6 +63,7 @@ done
 
 if [ -z "$store_pass" ]; then
   usage
+  exit 1
 else
   run
 fi
