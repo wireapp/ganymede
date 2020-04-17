@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 output_dir=ganymede
 version_file=$output_dir/version.txt
 certificate=$output_dir/swisscom.jks
@@ -27,7 +29,7 @@ create_version_file() {
 }
 
 create_certificate() {
-  echo "$certificate_base" | base64 -d -o "$certificate"
+  echo "$certificate_base" | base64 -d > "$certificate"
 }
 
 create_build() {

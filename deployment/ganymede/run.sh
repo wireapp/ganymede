@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 config_file=$(pwd)/.env
 version_file=$(pwd)/version.txt
 store_name=swisscom.jks
