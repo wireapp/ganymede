@@ -2,6 +2,7 @@ package com.wire.ganymede.setup.exceptions
 
 import com.wire.ganymede.swisscom.errors.dataValidationExceptionHandler
 import com.wire.ganymede.utils.countException
+import com.wire.ganymede.utils.createLogger
 import io.ktor.application.Application
 import io.ktor.application.ApplicationCall
 import io.ktor.application.call
@@ -11,11 +12,10 @@ import io.ktor.features.StatusPages
 import io.ktor.http.HttpStatusCode
 import io.ktor.response.respond
 import io.micrometer.prometheus.PrometheusMeterRegistry
-import mu.KLogging
 import org.kodein.di.LazyKodein
 import org.kodein.di.generic.instance
 
-private val logger = KLogging().logger("ExceptionHandler")
+private val logger = createLogger("ExceptionHandler")
 
 /**
  * Registers exception handling.

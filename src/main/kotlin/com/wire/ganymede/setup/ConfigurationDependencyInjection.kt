@@ -5,14 +5,14 @@ import ai.blindspot.ktoolz.extensions.whenNull
 import com.wire.ganymede.dto.KeyStoreConfiguration
 import com.wire.ganymede.internal.model.WireAPIConfig
 import com.wire.ganymede.swisscom.model.SwisscomAPIConfig
-import mu.KLogging
+import com.wire.ganymede.utils.createLogger
 import org.kodein.di.Kodein.MainBuilder
 import org.kodein.di.generic.bind
 import org.kodein.di.generic.singleton
 import java.io.File
 import java.util.Properties
 
-private val logger = KLogging().logger("EnvironmentLoaderLogger")
+private val logger = createLogger("EnvironmentLoaderLogger")
 
 /**
  * Loads the DI container with configuration from the system environment.
