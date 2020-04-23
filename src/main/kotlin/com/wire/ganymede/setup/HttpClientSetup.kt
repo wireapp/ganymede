@@ -30,11 +30,12 @@ fun client(config: KeyStoreConfiguration, meterRegistry: MeterRegistry) =
             serializer = JacksonSerializer()
         }
 
-        install(ResponseObserver) {
-            onResponse {
-                meterRegistry.httpCall(it)
-            }
-        }
+// TODO check https://github.com/ktorio/ktor/issues/1813
+//        install(ResponseObserver) {
+//            onResponse {
+//                meterRegistry.httpCall(it)
+//            }
+//        }
 
         install(Logging) {
             logger = Logger.TRACE
