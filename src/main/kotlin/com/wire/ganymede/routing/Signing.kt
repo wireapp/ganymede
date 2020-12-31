@@ -1,6 +1,5 @@
 package com.wire.ganymede.routing
 
-import pw.forst.tools.katlib.isUUID
 import com.wire.ganymede.routing.requests.SignRequest
 import com.wire.ganymede.setup.auth.userUuid
 import com.wire.ganymede.swisscom.SigningService
@@ -12,6 +11,7 @@ import io.ktor.routing.Routing
 import io.ktor.routing.post
 import org.kodein.di.LazyKodein
 import org.kodein.di.generic.instance
+import pw.forst.tools.katlib.isUUID
 import java.util.UUID
 
 /**

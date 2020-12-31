@@ -1,7 +1,7 @@
 package com.wire.ganymede.swisscom.errors
 
-import pw.forst.tools.katlib.parseJson
 import com.fasterxml.jackson.databind.JsonNode
+import pw.forst.tools.katlib.parseJson
 
 /**
  * Try to guess what does the received payload mean.

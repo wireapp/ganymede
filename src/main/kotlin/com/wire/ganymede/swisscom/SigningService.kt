@@ -1,12 +1,12 @@
 package com.wire.ganymede.swisscom
 
-import pw.forst.tools.katlib.whenNull
 import com.wire.ganymede.internal.WireClient
 import com.wire.ganymede.internal.model.SignResponse
 import com.wire.ganymede.internal.model.Signature
 import com.wire.ganymede.internal.model.User
 import com.wire.ganymede.setup.exceptions.SwisscomDataValidationException
 import mu.KLogging
+import pw.forst.tools.katlib.whenNull
 import java.util.UUID
 
 /**

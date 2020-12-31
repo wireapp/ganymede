@@ -32,7 +32,7 @@ fun client(config: KeyStoreConfiguration, meterRegistry: MeterRegistry) =
 
         // TODO check https://github.com/ktorio/ktor/issues/1813
         @Suppress("ConstantConditionIf") // temporary disabled until https://github.com/ktorio/ktor/issues/1813 is resolved
-        if(false) {
+        if (false) {
             install(ResponseObserver) {
                 onResponse {
                     meterRegistry.httpCall(it)

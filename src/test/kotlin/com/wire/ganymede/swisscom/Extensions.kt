@@ -1,7 +1,7 @@
 package com.wire.ganymede.swisscom
 
-import pw.forst.tools.katlib.hashWith256
 import mu.KLogging
+import pw.forst.tools.katlib.hashWith256
 import kotlin.test.Test
 import kotlin.test.assertTrue
 

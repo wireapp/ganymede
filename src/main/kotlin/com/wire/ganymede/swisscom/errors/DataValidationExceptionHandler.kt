@@ -1,8 +1,5 @@
 package com.wire.ganymede.swisscom.errors
 
-import pw.forst.tools.katlib.newLine
-import pw.forst.tools.katlib.prettyPrintJson
-import pw.forst.tools.katlib.whenNull
 import com.wire.ganymede.setup.exceptions.SwisscomDataValidationException
 import com.wire.ganymede.setup.exceptions.errorResponse
 import com.wire.ganymede.utils.countException
@@ -14,6 +11,9 @@ import io.ktor.http.HttpStatusCode
 import io.ktor.response.respond
 import io.micrometer.core.instrument.MeterRegistry
 import kotlinx.coroutines.delay
+import pw.forst.tools.katlib.newLine
+import pw.forst.tools.katlib.prettyPrintJson
+import pw.forst.tools.katlib.whenNull
 
 private val logger = createLogger("DataValidationExceptionHandler")
 

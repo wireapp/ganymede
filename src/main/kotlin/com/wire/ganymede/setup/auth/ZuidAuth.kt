@@ -1,11 +1,11 @@
 package com.wire.ganymede.setup.auth
 
-import pw.forst.tools.katlib.isUUID
 import com.wire.ganymede.setup.exceptions.UnauthorizedException
 import io.ktor.application.ApplicationCall
 import io.ktor.application.call
 import io.ktor.request.header
 import io.ktor.util.pipeline.PipelineContext
+import pw.forst.tools.katlib.isUUID
 import java.util.UUID
 
 /**

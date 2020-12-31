@@ -1,6 +1,5 @@
 package com.wire.ganymede.swisscom
 
-import pw.forst.tools.katlib.parseJson
 import com.wire.ganymede.internal.model.User
 import com.wire.ganymede.setup.exceptions.SwisscomUnavailableException
 import com.wire.ganymede.swisscom.model.RootPendingRequest
@@ -21,6 +20,7 @@ import io.ktor.http.ContentType
 import io.ktor.http.contentType
 import io.ktor.http.isSuccess
 import mu.KLogging
+import pw.forst.tools.katlib.parseJson
 import java.util.UUID
 
 /**

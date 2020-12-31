@@ -1,7 +1,5 @@
 package com.wire.ganymede.setup
 
-import pw.forst.tools.katlib.getEnv
-import pw.forst.tools.katlib.whenNull
 import com.wire.ganymede.dto.KeyStoreConfiguration
 import com.wire.ganymede.internal.model.WireAPIConfig
 import com.wire.ganymede.swisscom.model.SwisscomAPIConfig
@@ -9,6 +7,8 @@ import com.wire.ganymede.utils.createLogger
 import org.kodein.di.Kodein.MainBuilder
 import org.kodein.di.generic.bind
 import org.kodein.di.generic.singleton
+import pw.forst.tools.katlib.getEnv
+import pw.forst.tools.katlib.whenNull
 import java.io.File
 import java.util.Properties
 

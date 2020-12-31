@@ -1,9 +1,9 @@
 package com.wire.ganymede.swisscom
 
-import pw.forst.tools.katlib.createJson
-import pw.forst.tools.katlib.prettyPrintJson
 import kotlinx.coroutines.runBlocking
 import mu.KLogging
+import pw.forst.tools.katlib.createJson
+import pw.forst.tools.katlib.prettyPrintJson
 import java.util.UUID
 import kotlin.test.Ignore
 import kotlin.test.Test
