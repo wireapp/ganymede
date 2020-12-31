@@ -1,6 +1,6 @@
 package com.wire.ganymede.routing
 
-import ai.blindspot.ktoolz.extensions.isUUID
+import pw.forst.tools.katlib.isUUID
 import com.wire.ganymede.routing.requests.SignRequest
 import com.wire.ganymede.setup.auth.userUuid
 import com.wire.ganymede.swisscom.SigningService

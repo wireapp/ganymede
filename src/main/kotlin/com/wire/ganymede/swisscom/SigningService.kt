@@ -1,6 +1,6 @@
 package com.wire.ganymede.swisscom
 
-import ai.blindspot.ktoolz.extensions.whenNull
+import pw.forst.tools.katlib.whenNull
 import com.wire.ganymede.internal.WireClient
 import com.wire.ganymede.internal.model.SignResponse
 import com.wire.ganymede.internal.model.Signature

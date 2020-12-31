@@ -1,7 +1,7 @@
 package com.wire.ganymede.setup
 
-import ai.blindspot.ktoolz.extensions.getEnv
-import ai.blindspot.ktoolz.extensions.whenNull
+import pw.forst.tools.katlib.getEnv
+import pw.forst.tools.katlib.whenNull
 import com.wire.ganymede.dto.KeyStoreConfiguration
 import com.wire.ganymede.internal.model.WireAPIConfig
 import com.wire.ganymede.swisscom.model.SwisscomAPIConfig

@@ -1,6 +1,6 @@
 package com.wire.ganymede.swisscom
 
-import ai.blindspot.ktoolz.extensions.prettyPrintJson
+import pw.forst.tools.katlib.prettyPrintJson
 import kotlinx.coroutines.runBlocking
 import mu.KLogging
 import java.util.UUID

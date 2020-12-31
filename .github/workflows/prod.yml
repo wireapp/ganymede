@@ -2,7 +2,7 @@ name: Release Pipeline
 
 on:
   release:
-    types: published
+    types: [published]
 
 env:
   DOCKER_IMAGE: lukaswire/ganymede
@@ -14,9 +14,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-        # use latest tag as release version
       - name: Set Release Version
-        run: echo ::set-env name=RELEASE_VERSION::${GITHUB_REF:10}
+        # use latest tag as release version
+        run: echo "RELEASE_VERSION=${GITHUB_REF:10}" >> $GITHUB_ENV
 
       # release docker image
       - name: Build and publish docker image

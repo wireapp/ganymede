@@ -1,8 +1,8 @@
 package com.wire.ganymede.swisscom.errors
 
-import ai.blindspot.ktoolz.extensions.newLine
-import ai.blindspot.ktoolz.extensions.prettyPrintJson
-import ai.blindspot.ktoolz.extensions.whenNull
+import pw.forst.tools.katlib.newLine
+import pw.forst.tools.katlib.prettyPrintJson
+import pw.forst.tools.katlib.whenNull
 import com.wire.ganymede.setup.exceptions.SwisscomDataValidationException
 import com.wire.ganymede.setup.exceptions.errorResponse
 import com.wire.ganymede.utils.countException

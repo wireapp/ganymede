@@ -1,17 +1,17 @@
 plugins {
-    kotlin("jvm") version "1.3.72"
+    kotlin("jvm") version "1.4.21"
     application
     distribution
-    id("net.nemerosa.versioning") version "2.12.1"
+    id("net.nemerosa.versioning") version "2.14.0"
 }
 
 group = "com.wire.ganymede"
-version = versioning.info?.tag ?: versioning.info?.lastTag ?: "development"
+version = versioning.info?.tag ?: versioning.info?.lastTag ?: versioning.info?.build ?: "development"
 
-val mainClass = "com.wire.ganymede.AppKt"
+val mClass = "com.wire.ganymede.AppKt"
 
 application {
-    mainClassName = mainClass
+    mainClass.set(mClass)
 }
 
 repositories {
@@ -19,20 +19,18 @@ repositories {
 }
 
 dependencies {
-    // stdlib
-    implementation(kotlin("stdlib-jdk8"))
     // extension functions
-    implementation("ai.blindspot.ktoolz", "ktoolz", "1.0.6")
+    implementation("pw.forst.tools", "katlib", "1.2.1")
 
     // Ktor server dependencies
-    val ktorVersion = "1.3.2"
+    val ktorVersion = "1.5.0"
     implementation("io.ktor", "ktor-server-core", ktorVersion)
     implementation("io.ktor", "ktor-server-netty", ktorVersion)
     implementation("io.ktor", "ktor-jackson", ktorVersion)
 
     // Prometheus metrics
     implementation("io.ktor", "ktor-metrics-micrometer", ktorVersion)
-    implementation("io.micrometer", "micrometer-registry-prometheus", "1.4.1")
+    implementation("io.micrometer", "micrometer-registry-prometheus", "1.6.2")
 
     // Ktor client dependencies
     implementation("io.ktor", "ktor-client-json", ktorVersion)
@@ -41,19 +39,19 @@ dependencies {
     implementation("io.ktor", "ktor-client-logging-jvm", ktorVersion)
 
     // logging
-    implementation("io.github.microutils", "kotlin-logging", "1.7.9")
-    implementation("ch.qos.logback", "logback-classic", "1.2.3")
+    implementation("io.github.microutils", "kotlin-logging", "2.0.4")
+    implementation("ch.qos.logback", "logback-classic", "1.3.0-alpha5")
 
     // DI
-    val kodeinVersion = "6.5.4"
+    val kodeinVersion = "6.5.5"
     implementation("org.kodein.di", "kodein-di-generic-jvm", kodeinVersion)
     implementation("org.kodein.di", "kodein-di-framework-ktor-server-jvm", kodeinVersion)
 
     // tests
-    testImplementation("io.mockk", "mockk", "1.9.3")
+    testImplementation("io.mockk", "mockk", "1.10.4")
     testImplementation(kotlin("test"))
     testImplementation(kotlin("test-junit5"))
-    val junitVersion = "5.6.2"
+    val junitVersion = "5.7.0"
     testImplementation("org.junit.jupiter", "junit-jupiter-params", junitVersion)
     testRuntimeOnly("org.junit.jupiter", "junit-jupiter-engine", junitVersion)
 }
@@ -84,7 +82,7 @@ tasks {
 
     register<Jar>("fatJar") {
         manifest {
-            attributes["Main-Class"] = mainClass
+            attributes["Main-Class"] = mClass
         }
         duplicatesStrategy = DuplicatesStrategy.EXCLUDE
         archiveFileName.set("app.jar")

@@ -1,6 +1,6 @@
 package com.wire.ganymede.swisscom
 
-import ai.blindspot.ktoolz.extensions.hashWith256
+import pw.forst.tools.katlib.hashWith256
 import mu.KLogging
 import kotlin.test.Test
 import kotlin.test.assertTrue

@@ -1,6 +1,6 @@
 package com.wire.ganymede.swisscom
 
-import ai.blindspot.ktoolz.extensions.parseJson
+import pw.forst.tools.katlib.parseJson
 import com.wire.ganymede.internal.model.User
 import com.wire.ganymede.setup.exceptions.SwisscomUnavailableException
 import com.wire.ganymede.swisscom.model.RootPendingRequest

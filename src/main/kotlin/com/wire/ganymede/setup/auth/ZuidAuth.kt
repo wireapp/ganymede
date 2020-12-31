@@ -1,6 +1,6 @@
 package com.wire.ganymede.setup.auth
 
-import ai.blindspot.ktoolz.extensions.isUUID
+import pw.forst.tools.katlib.isUUID
 import com.wire.ganymede.setup.exceptions.UnauthorizedException
 import io.ktor.application.ApplicationCall
 import io.ktor.application.call

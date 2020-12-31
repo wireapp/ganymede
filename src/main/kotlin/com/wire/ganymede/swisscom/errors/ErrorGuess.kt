@@ -1,6 +1,6 @@
 package com.wire.ganymede.swisscom.errors
 
-import ai.blindspot.ktoolz.extensions.parseJson
+import pw.forst.tools.katlib.parseJson
 import com.fasterxml.jackson.databind.JsonNode
 
 /**
